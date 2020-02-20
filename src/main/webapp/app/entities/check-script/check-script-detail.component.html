@@ -1,0 +1,54 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="checkScript">
+            <h2><span jhiTranslate="zeemonApp.checkScript.detail.title">Check Script</span> {{ checkScript.id }}</h2>
+
+            <hr>
+
+            <jhi-alert-error></jhi-alert-error>
+
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="zeemonApp.checkScript.scriptName">Script Name</span></dt>
+                <dd>
+                    <span>{{ checkScript.scriptName }}</span>
+                </dd>
+                <dt><span jhiTranslate="zeemonApp.checkScript.scriptType">Script Type</span></dt>
+                <dd>
+                    <span jhiTranslate="{{ 'zeemonApp.ScriptType.' + checkScript.scriptType }}">{{ checkScript.scriptType }}</span>
+                </dd>
+                <dt><span jhiTranslate="zeemonApp.checkScript.scriptSource">Script Source</span></dt>
+                <dd>
+                    <span>{{ checkScript.scriptSource }}</span>
+                </dd>
+                <dt><span jhiTranslate="zeemonApp.checkScript.actionRuleExpression">Action Rule Expression</span></dt>
+                <dd>
+                    <span>{{ checkScript.actionRuleExpression }}</span>
+                </dd>
+                <dt><span jhiTranslate="zeemonApp.checkScript.endpoint">Endpoint</span></dt>
+                <dd>
+                    <div *ngIf="checkScript.endpoint">
+                        <a [routerLink]="['/endpoint', checkScript.endpoint?.id, 'view']">{{ checkScript.endpoint?.endpointName }}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="zeemonApp.checkScript.contentMapper">Content Mapper</span></dt>
+                <dd>
+                    <div *ngIf="checkScript.contentMapper">
+                        <a [routerLink]="['/content-mapper', checkScript.contentMapper?.id, 'view']">{{ checkScript.contentMapper?.mapperName }}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/check-script', checkScript.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

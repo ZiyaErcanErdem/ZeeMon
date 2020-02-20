@@ -1,0 +1,73 @@
+{
+    "name": "Flow",
+    "fields": [
+        {
+            "fieldName": "flowName",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required",
+                "maxlength"
+            ],
+            "fieldValidateRulesMaxlength": 255
+        },
+        {
+            "fieldName": "flowDescription",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "maxlength"
+            ],
+            "fieldValidateRulesMaxlength": 512
+        },
+        {
+            "fieldName": "nextExecutionStartTime",
+            "fieldType": "Instant"
+        },
+        {
+            "fieldName": "flowState",
+            "fieldType": "FlowState",
+            "fieldValues": "PENDING,PAUSED,PROCESSING",
+            "fieldValidateRules": [
+                "required"
+            ]
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "flowExecution",
+            "otherEntityRelationshipName": "flow",
+            "relationshipName": "flowExecution"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "task",
+            "otherEntityRelationshipName": "flow",
+            "relationshipName": "task"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "content",
+            "otherEntityRelationshipName": "flow",
+            "relationshipName": "content"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "eventTrigger",
+            "otherEntityRelationshipName": "flow",
+            "relationshipName": "eventTrigger",
+            "otherEntityField": "triggerName"
+        }
+    ],
+    "changelogDate": "20191031122719",
+    "entityTableName": "flow",
+    "dto": "no",
+    "pagination": "pagination",
+    "service": "serviceClass",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": [
+        "zeemon"
+    ],
+    "microserviceName": "zeemonManager"
+}

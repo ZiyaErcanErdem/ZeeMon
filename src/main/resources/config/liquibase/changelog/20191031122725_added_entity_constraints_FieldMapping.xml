@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.6.xsd">
+    <!--
+        Added the constraints for entity FieldMapping.
+    -->
+    <changeSet id="20191031122725-2" author="jhipster">
+        
+        <addForeignKeyConstraint baseColumnNames="content_mapper_id"
+                                 baseTableName="field_mapping"
+                                 constraintName="fk_field_mapping_content_mapper_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="content_mapper"/>
+
+    </changeSet>
+</databaseChangeLog>

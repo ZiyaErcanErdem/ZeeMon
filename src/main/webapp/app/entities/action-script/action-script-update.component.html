@@ -1,0 +1,113 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+            <h2 id="jhi-action-script-heading" jhiTranslate="zeemonApp.actionScript.home.createOrEditLabel">Create or edit a Action Script</h2>
+
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+
+                <div class="form-group" [hidden]="!editForm.get('id')!.value">
+                    <label for="id" jhiTranslate="global.field.id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id" formControlName="id" readonly />
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="zeemonApp.actionScript.actionCode" for="field_actionCode">Action Code</label>
+                    <input type="text" class="form-control" name="actionCode" id="field_actionCode"
+                           formControlName="actionCode"/>
+                    <div *ngIf="editForm.get('actionCode')!.invalid && (editForm.get('actionCode')!.dirty || editForm.get('actionCode')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('actionCode')?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('actionCode')?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: 20 }">
+                        This field cannot be longer than 20 characters.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="zeemonApp.actionScript.scriptName" for="field_scriptName">Script Name</label>
+                    <input type="text" class="form-control" name="scriptName" id="field_scriptName"
+                           formControlName="scriptName"/>
+                    <div *ngIf="editForm.get('scriptName')!.invalid && (editForm.get('scriptName')!.dirty || editForm.get('scriptName')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('scriptName')?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('scriptName')?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: 255 }">
+                        This field cannot be longer than 255 characters.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="zeemonApp.actionScript.scriptType" for="field_scriptType">Script Type</label>
+                    <select class="form-control" name="scriptType" formControlName="scriptType" id="field_scriptType">
+                        <option value="SQL_SCRIPT">{{ 'zeemonApp.ScriptType.SQL_SCRIPT' | translate }}</option>
+                        <option value="SHELL_SCRIPT">{{ 'zeemonApp.ScriptType.SHELL_SCRIPT' | translate }}</option>
+                    </select>
+                    <div *ngIf="editForm.get('scriptType')!.invalid && (editForm.get('scriptType')!.dirty || editForm.get('scriptType')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('scriptType')?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="zeemonApp.actionScript.actionType" for="field_actionType">Action Type</label>
+                    <select class="form-control" name="actionType" formControlName="actionType" id="field_actionType">
+                        <option value="EMAIL">{{ 'zeemonApp.ActionType.EMAIL' | translate }}</option>
+                        <option value="SMS">{{ 'zeemonApp.ActionType.SMS' | translate }}</option>
+                        <option value="SCRIPT">{{ 'zeemonApp.ActionType.SCRIPT' | translate }}</option>
+                    </select>
+                    <div *ngIf="editForm.get('actionType')!.invalid && (editForm.get('actionType')!.dirty || editForm.get('actionType')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('actionType')?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="zeemonApp.actionScript.actionSource" for="field_actionSource">Action Source</label>
+                    <input type="text" class="form-control" name="actionSource" id="field_actionSource"
+                           formControlName="actionSource"/>
+                    <div *ngIf="editForm.get('actionSource')!.invalid && (editForm.get('actionSource')!.dirty || editForm.get('actionSource')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('actionSource')?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: 2048 }">
+                        This field cannot be longer than 2048 characters.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="zeemonApp.actionScript.endpoint" for="field_endpoint">Endpoint</label>
+                    <select class="form-control" id="field_endpoint" name="endpoint" formControlName="endpoint">
+                        <option *ngIf="!editForm.get('endpoint')!.value" [ngValue]="null" selected></option>
+                        <option [ngValue]="endpointOption.id === editForm.get('endpoint')!.value?.id ? editForm.get('endpoint')!.value : endpointOption" *ngFor="let endpointOption of endpoints; trackBy: trackById">{{ endpointOption.endpointName }}</option>
+                    </select>
+                </div>
+                <div *ngIf="editForm.get('endpoint')!.invalid && (editForm.get('endpoint')!.dirty || editForm.get('endpoint')!.touched)">
+                    <small class="form-text text-danger"
+                           *ngIf="editForm.get('endpoint')?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                    </small>
+                </div>
+            </div>
+
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
+                    <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+                </button>
+
+                <button type="submit" id="save-entity" [disabled]="editForm.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

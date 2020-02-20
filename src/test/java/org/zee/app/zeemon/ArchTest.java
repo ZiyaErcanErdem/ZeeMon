@@ -1,0 +1,29 @@
+package org.zee.app.zeemon;
+
+import com.tngtech.archunit.core.domain.JavaClasses;
+import com.tngtech.archunit.core.importer.ClassFileImporter;
+import com.tngtech.archunit.core.importer.ImportOption;
+import org.junit.jupiter.api.Test;
+
+import static com.tngtech.archunit.lang.syntax.ArchRuleDefinition.noClasses;
+
+class ArchTest {
+
+    @Test
+    void servicesAndRepositoriesShouldNotDependOnWebLayer() {
+
+        JavaClasses importedClasses = new ClassFileImporter()
+            .withImportOption(ImportOption.Predefined.DO_NOT_INCLUDE_TESTS)
+            .importPackages("org.zee.app.zeemon");
+
+        noClasses()
+            .that()
+                .resideInAnyPackage("org.zee.app.zeemon.service..")
+            .or()
+                .resideInAnyPackage("org.zee.app.zeemon.repository..")
+            .should().dependOnClassesThat()
+                .resideInAnyPackage("..org.zee.app.zeemon.web..")
+        .because("Services and repositories should not depend on web layer")
+        .check(importedClasses);
+    }
+}

@@ -1,0 +1,83 @@
+<div>
+    <h2 id="page-heading">
+        <span jhiTranslate="zeemonApp.actionExecution.home.title">Action Executions</span>
+
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-action-execution" [routerLink]="['/action-execution/new']">
+            <fa-icon icon="plus"></fa-icon>
+            <span  jhiTranslate="zeemonApp.actionExecution.home.createLabel">
+            Create a new Action Execution
+            </span>
+        </button>
+    </h2>
+
+    <jhi-alert-error></jhi-alert-error>
+
+    <jhi-alert></jhi-alert>
+
+    <div class="alert alert-warning" id="no-result" *ngIf="actionExecutions?.length === 0">
+        <span jhiTranslate="zeemonApp.actionExecution.home.notFound">No actionExecutions found</span>
+    </div>
+
+    <div class="table-responsive" id="entities" *ngIf="actionExecutions?.length > 0">
+        <table class="table table-striped" aria-describedby="page-heading">
+            <thead>
+                <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" [callback]="loadPage.bind(this)">
+                    <th scope="col"  jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="executionStartTime"><span jhiTranslate="zeemonApp.actionExecution.executionStartTime">Execution Start Time</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="executionEndTime"><span jhiTranslate="zeemonApp.actionExecution.executionEndTime">Execution End Time</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="executionStatus"><span jhiTranslate="zeemonApp.actionExecution.executionStatus">Execution Status</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="actionLog"><span jhiTranslate="zeemonApp.actionExecution.actionLog">Action Log</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="action.actionName"><span jhiTranslate="zeemonApp.actionExecution.action">Action</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let actionExecution of actionExecutions ;trackBy: trackId">
+                    <td><a [routerLink]="['/action-execution', actionExecution.id, 'view']">{{ actionExecution.id }}</a></td>
+                    <td>{{ actionExecution.executionStartTime | date:'medium' }}</td>
+                    <td>{{ actionExecution.executionEndTime | date:'medium' }}</td>
+                    <td jhiTranslate="{{ 'zeemonApp.ExecutionStatus.' + actionExecution.executionStatus }}">{{ actionExecution.executionStatus }}</td>
+                    <td>{{ actionExecution.actionLog }}</td>
+                    <td>
+                        <div *ngIf="actionExecution.action">
+                            <a [routerLink]="['/action', actionExecution.action?.id, 'view']" >{{ actionExecution.action?.actionName }}</a>
+                        </div>
+                    </td>
+                    <td class="text-right">
+                        <div class="btn-group">
+                            <button type="submit"
+                                    [routerLink]="['/action-execution', actionExecution.id, 'view']"
+                                    class="btn btn-info btn-sm">
+                                <fa-icon icon="eye"></fa-icon>
+                                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                            </button>
+
+                            <button type="submit"
+                                    [routerLink]="['/action-execution', actionExecution.id, 'edit']"
+                                    class="btn btn-primary btn-sm">
+                                <fa-icon icon="pencil-alt"></fa-icon>
+                                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                            </button>
+
+                            <button type="submit" (click)="delete(actionExecution)"
+                                    class="btn btn-danger btn-sm">
+                                <fa-icon icon="times"></fa-icon>
+                                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div *ngIf="actionExecutions?.length > 0">
+        <div class="row justify-content-center">
+            <jhi-item-count [page]="page" [total]="totalItems" [itemsPerPage]="itemsPerPage"></jhi-item-count>
+        </div>
+
+        <div class="row justify-content-center">
+            <ngb-pagination [collectionSize]="totalItems" [(page)]="ngbPaginationPage" [pageSize]="itemsPerPage" [maxSize]="5" [rotate]="true" [boundaryLinks]="true" (pageChange)="loadPage($event)"></ngb-pagination>
+        </div>
+    </div>
+</div>

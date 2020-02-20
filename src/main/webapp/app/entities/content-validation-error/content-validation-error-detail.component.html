@@ -1,0 +1,50 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="contentValidationError">
+            <h2><span jhiTranslate="zeemonApp.contentValidationError.detail.title">Content Validation Error</span> {{ contentValidationError.id }}</h2>
+
+            <hr>
+
+            <jhi-alert-error></jhi-alert-error>
+
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="zeemonApp.contentValidationError.sourceIndex">Source Index</span></dt>
+                <dd>
+                    <span>{{ contentValidationError.sourceIndex }}</span>
+                </dd>
+                <dt><span jhiTranslate="zeemonApp.contentValidationError.sourceText">Source Text</span></dt>
+                <dd>
+                    <span>{{ contentValidationError.sourceText }}</span>
+                </dd>
+                <dt><span jhiTranslate="zeemonApp.contentValidationError.errorText">Error Text</span></dt>
+                <dd>
+                    <span>{{ contentValidationError.errorText }}</span>
+                </dd>
+                <dt><span jhiTranslate="zeemonApp.contentValidationError.task">Task</span></dt>
+                <dd>
+                    <div *ngIf="contentValidationError.task">
+                        <a [routerLink]="['/task', contentValidationError.task?.id, 'view']">{{ contentValidationError.task?.taskName }}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="zeemonApp.contentValidationError.taskExecution">Task Execution</span></dt>
+                <dd>
+                    <div *ngIf="contentValidationError.taskExecution">
+                        <a [routerLink]="['/task-execution', contentValidationError.taskExecution?.id, 'view']">{{ contentValidationError.taskExecution?.id }}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/content-validation-error', contentValidationError.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.6.xsd">
+    <!--
+        Added the constraints for entity EndpointProperty.
+    -->
+    <changeSet id="20191031122711-2" author="jhipster">
+        
+        <addForeignKeyConstraint baseColumnNames="endpoint_id"
+                                 baseTableName="endpoint_property"
+                                 constraintName="fk_endpoint_property_endpoint_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="endpoint"/>
+
+    </changeSet>
+</databaseChangeLog>

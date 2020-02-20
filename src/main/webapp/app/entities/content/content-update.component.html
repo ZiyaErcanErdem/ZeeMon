@@ -1,0 +1,581 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+            <h2 id="jhi-content-heading" jhiTranslate="zeemonApp.content.home.createOrEditLabel">Create or edit a Content</h2>
+
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+
+                <div class="form-group" [hidden]="!editForm.get('id')!.value">
+                    <label for="id" jhiTranslate="global.field.id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id" formControlName="id" readonly />
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="zeemonApp.content.sourceIndex" for="field_sourceIndex">Source Index</label>
+                    <input type="number" class="form-control" name="sourceIndex" id="field_sourceIndex"
+                           formControlName="sourceIndex"/>
+                    <div *ngIf="editForm.get('sourceIndex')!.invalid && (editForm.get('sourceIndex')!.dirty || editForm.get('sourceIndex')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('sourceIndex')?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('sourceIndex')?.errors?.min" jhiTranslate="entity.validation.min" [translateValues]="{ min: 0 }">
+                            This field should be at least 0.
+                        </small>
+                        <small class="form-text text-danger"
+                            [hidden]="!editForm.get('sourceIndex')?.errors?.number" jhiTranslate="entity.validation.number">
+                            This field should be a number.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="zeemonApp.content.txt1" for="field_txt1">Txt 1</label>
+                    <input type="text" class="form-control" name="txt1" id="field_txt1"
+                           formControlName="txt1"/>
+                    <div *ngIf="editForm.get('txt1')!.invalid && (editForm.get('txt1')!.dirty || editForm.get('txt1')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('txt1')?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: 255 }">
+                        This field cannot be longer than 255 characters.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="zeemonApp.content.txt2" for="field_txt2">Txt 2</label>
+                    <input type="text" class="form-control" name="txt2" id="field_txt2"
+                           formControlName="txt2"/>
+                    <div *ngIf="editForm.get('txt2')!.invalid && (editForm.get('txt2')!.dirty || editForm.get('txt2')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('txt2')?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: 255 }">
+                        This field cannot be longer than 255 characters.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="zeemonApp.content.txt3" for="field_txt3">Txt 3</label>
+                    <input type="text" class="form-control" name="txt3" id="field_txt3"
+                           formControlName="txt3"/>
+                    <div *ngIf="editForm.get('txt3')!.invalid && (editForm.get('txt3')!.dirty || editForm.get('txt3')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('txt3')?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: 255 }">
+                        This field cannot be longer than 255 characters.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="zeemonApp.content.txt4" for="field_txt4">Txt 4</label>
+                    <input type="text" class="form-control" name="txt4" id="field_txt4"
+                           formControlName="txt4"/>
+                    <div *ngIf="editForm.get('txt4')!.invalid && (editForm.get('txt4')!.dirty || editForm.get('txt4')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('txt4')?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: 255 }">
+                        This field cannot be longer than 255 characters.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="zeemonApp.content.txt5" for="field_txt5">Txt 5</label>
+                    <input type="text" class="form-control" name="txt5" id="field_txt5"
+                           formControlName="txt5"/>
+                    <div *ngIf="editForm.get('txt5')!.invalid && (editForm.get('txt5')!.dirty || editForm.get('txt5')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('txt5')?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: 255 }">
+                        This field cannot be longer than 255 characters.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="zeemonApp.content.txt6" for="field_txt6">Txt 6</label>
+                    <input type="text" class="form-control" name="txt6" id="field_txt6"
+                           formControlName="txt6"/>
+                    <div *ngIf="editForm.get('txt6')!.invalid && (editForm.get('txt6')!.dirty || editForm.get('txt6')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('txt6')?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: 255 }">
+                        This field cannot be longer than 255 characters.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="zeemonApp.content.txt7" for="field_txt7">Txt 7</label>
+                    <input type="text" class="form-control" name="txt7" id="field_txt7"
+                           formControlName="txt7"/>
+                    <div *ngIf="editForm.get('txt7')!.invalid && (editForm.get('txt7')!.dirty || editForm.get('txt7')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('txt7')?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: 255 }">
+                        This field cannot be longer than 255 characters.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="zeemonApp.content.txt8" for="field_txt8">Txt 8</label>
+                    <input type="text" class="form-control" name="txt8" id="field_txt8"
+                           formControlName="txt8"/>
+                    <div *ngIf="editForm.get('txt8')!.invalid && (editForm.get('txt8')!.dirty || editForm.get('txt8')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('txt8')?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: 255 }">
+                        This field cannot be longer than 255 characters.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="zeemonApp.content.txt9" for="field_txt9">Txt 9</label>
+                    <input type="text" class="form-control" name="txt9" id="field_txt9"
+                           formControlName="txt9"/>
+                    <div *ngIf="editForm.get('txt9')!.invalid && (editForm.get('txt9')!.dirty || editForm.get('txt9')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('txt9')?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: 255 }">
+                        This field cannot be longer than 255 characters.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="zeemonApp.content.txt10" for="field_txt10">Txt 10</label>
+                    <input type="text" class="form-control" name="txt10" id="field_txt10"
+                           formControlName="txt10"/>
+                    <div *ngIf="editForm.get('txt10')!.invalid && (editForm.get('txt10')!.dirty || editForm.get('txt10')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('txt10')?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: 255 }">
+                        This field cannot be longer than 255 characters.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="zeemonApp.content.txt11" for="field_txt11">Txt 11</label>
+                    <input type="text" class="form-control" name="txt11" id="field_txt11"
+                           formControlName="txt11"/>
+                    <div *ngIf="editForm.get('txt11')!.invalid && (editForm.get('txt11')!.dirty || editForm.get('txt11')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('txt11')?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: 255 }">
+                        This field cannot be longer than 255 characters.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="zeemonApp.content.txt12" for="field_txt12">Txt 12</label>
+                    <input type="text" class="form-control" name="txt12" id="field_txt12"
+                           formControlName="txt12"/>
+                    <div *ngIf="editForm.get('txt12')!.invalid && (editForm.get('txt12')!.dirty || editForm.get('txt12')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('txt12')?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: 255 }">
+                        This field cannot be longer than 255 characters.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="zeemonApp.content.txt13" for="field_txt13">Txt 13</label>
+                    <input type="text" class="form-control" name="txt13" id="field_txt13"
+                           formControlName="txt13"/>
+                    <div *ngIf="editForm.get('txt13')!.invalid && (editForm.get('txt13')!.dirty || editForm.get('txt13')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('txt13')?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: 255 }">
+                        This field cannot be longer than 255 characters.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="zeemonApp.content.txt14" for="field_txt14">Txt 14</label>
+                    <input type="text" class="form-control" name="txt14" id="field_txt14"
+                           formControlName="txt14"/>
+                    <div *ngIf="editForm.get('txt14')!.invalid && (editForm.get('txt14')!.dirty || editForm.get('txt14')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('txt14')?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: 255 }">
+                        This field cannot be longer than 255 characters.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="zeemonApp.content.txt15" for="field_txt15">Txt 15</label>
+                    <input type="text" class="form-control" name="txt15" id="field_txt15"
+                           formControlName="txt15"/>
+                    <div *ngIf="editForm.get('txt15')!.invalid && (editForm.get('txt15')!.dirty || editForm.get('txt15')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('txt15')?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: 255 }">
+                        This field cannot be longer than 255 characters.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="zeemonApp.content.txt16" for="field_txt16">Txt 16</label>
+                    <input type="text" class="form-control" name="txt16" id="field_txt16"
+                           formControlName="txt16"/>
+                    <div *ngIf="editForm.get('txt16')!.invalid && (editForm.get('txt16')!.dirty || editForm.get('txt16')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('txt16')?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: 255 }">
+                        This field cannot be longer than 255 characters.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="zeemonApp.content.txt17" for="field_txt17">Txt 17</label>
+                    <input type="text" class="form-control" name="txt17" id="field_txt17"
+                           formControlName="txt17"/>
+                    <div *ngIf="editForm.get('txt17')!.invalid && (editForm.get('txt17')!.dirty || editForm.get('txt17')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('txt17')?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: 255 }">
+                        This field cannot be longer than 255 characters.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="zeemonApp.content.txt18" for="field_txt18">Txt 18</label>
+                    <input type="text" class="form-control" name="txt18" id="field_txt18"
+                           formControlName="txt18"/>
+                    <div *ngIf="editForm.get('txt18')!.invalid && (editForm.get('txt18')!.dirty || editForm.get('txt18')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('txt18')?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: 255 }">
+                        This field cannot be longer than 255 characters.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="zeemonApp.content.txt19" for="field_txt19">Txt 19</label>
+                    <input type="text" class="form-control" name="txt19" id="field_txt19"
+                           formControlName="txt19"/>
+                    <div *ngIf="editForm.get('txt19')!.invalid && (editForm.get('txt19')!.dirty || editForm.get('txt19')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('txt19')?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: 255 }">
+                        This field cannot be longer than 255 characters.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="zeemonApp.content.txt20" for="field_txt20">Txt 20</label>
+                    <input type="text" class="form-control" name="txt20" id="field_txt20"
+                           formControlName="txt20"/>
+                    <div *ngIf="editForm.get('txt20')!.invalid && (editForm.get('txt20')!.dirty || editForm.get('txt20')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('txt20')?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: 255 }">
+                        This field cannot be longer than 255 characters.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="zeemonApp.content.num1" for="field_num1">Num 1</label>
+                    <input type="number" class="form-control" name="num1" id="field_num1"
+                           formControlName="num1"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="zeemonApp.content.num2" for="field_num2">Num 2</label>
+                    <input type="number" class="form-control" name="num2" id="field_num2"
+                           formControlName="num2"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="zeemonApp.content.num3" for="field_num3">Num 3</label>
+                    <input type="number" class="form-control" name="num3" id="field_num3"
+                           formControlName="num3"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="zeemonApp.content.num4" for="field_num4">Num 4</label>
+                    <input type="number" class="form-control" name="num4" id="field_num4"
+                           formControlName="num4"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="zeemonApp.content.num5" for="field_num5">Num 5</label>
+                    <input type="number" class="form-control" name="num5" id="field_num5"
+                           formControlName="num5"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="zeemonApp.content.num6" for="field_num6">Num 6</label>
+                    <input type="number" class="form-control" name="num6" id="field_num6"
+                           formControlName="num6"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="zeemonApp.content.num7" for="field_num7">Num 7</label>
+                    <input type="number" class="form-control" name="num7" id="field_num7"
+                           formControlName="num7"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="zeemonApp.content.num8" for="field_num8">Num 8</label>
+                    <input type="number" class="form-control" name="num8" id="field_num8"
+                           formControlName="num8"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="zeemonApp.content.num9" for="field_num9">Num 9</label>
+                    <input type="number" class="form-control" name="num9" id="field_num9"
+                           formControlName="num9"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="zeemonApp.content.num10" for="field_num10">Num 10</label>
+                    <input type="number" class="form-control" name="num10" id="field_num10"
+                           formControlName="num10"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="zeemonApp.content.num11" for="field_num11">Num 11</label>
+                    <input type="number" class="form-control" name="num11" id="field_num11"
+                           formControlName="num11"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="zeemonApp.content.num12" for="field_num12">Num 12</label>
+                    <input type="number" class="form-control" name="num12" id="field_num12"
+                           formControlName="num12"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="zeemonApp.content.num13" for="field_num13">Num 13</label>
+                    <input type="number" class="form-control" name="num13" id="field_num13"
+                           formControlName="num13"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="zeemonApp.content.num14" for="field_num14">Num 14</label>
+                    <input type="number" class="form-control" name="num14" id="field_num14"
+                           formControlName="num14"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="zeemonApp.content.num15" for="field_num15">Num 15</label>
+                    <input type="number" class="form-control" name="num15" id="field_num15"
+                           formControlName="num15"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="zeemonApp.content.num16" for="field_num16">Num 16</label>
+                    <input type="number" class="form-control" name="num16" id="field_num16"
+                           formControlName="num16"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="zeemonApp.content.num17" for="field_num17">Num 17</label>
+                    <input type="number" class="form-control" name="num17" id="field_num17"
+                           formControlName="num17"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="zeemonApp.content.num18" for="field_num18">Num 18</label>
+                    <input type="number" class="form-control" name="num18" id="field_num18"
+                           formControlName="num18"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="zeemonApp.content.num19" for="field_num19">Num 19</label>
+                    <input type="number" class="form-control" name="num19" id="field_num19"
+                           formControlName="num19"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="zeemonApp.content.num20" for="field_num20">Num 20</label>
+                    <input type="number" class="form-control" name="num20" id="field_num20"
+                           formControlName="num20"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="zeemonApp.content.date1" for="field_date1">Date 1</label>
+                    <div class="d-flex">
+                        <input id="field_date1" type="datetime-local" class="form-control" name="date1" formControlName="date1" placeholder="YYYY-MM-DD HH:mm"/>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="zeemonApp.content.date2" for="field_date2">Date 2</label>
+                    <div class="d-flex">
+                        <input id="field_date2" type="datetime-local" class="form-control" name="date2" formControlName="date2" placeholder="YYYY-MM-DD HH:mm"/>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="zeemonApp.content.date3" for="field_date3">Date 3</label>
+                    <div class="d-flex">
+                        <input id="field_date3" type="datetime-local" class="form-control" name="date3" formControlName="date3" placeholder="YYYY-MM-DD HH:mm"/>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="zeemonApp.content.date4" for="field_date4">Date 4</label>
+                    <div class="d-flex">
+                        <input id="field_date4" type="datetime-local" class="form-control" name="date4" formControlName="date4" placeholder="YYYY-MM-DD HH:mm"/>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="zeemonApp.content.date5" for="field_date5">Date 5</label>
+                    <div class="d-flex">
+                        <input id="field_date5" type="datetime-local" class="form-control" name="date5" formControlName="date5" placeholder="YYYY-MM-DD HH:mm"/>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="zeemonApp.content.date6" for="field_date6">Date 6</label>
+                    <div class="d-flex">
+                        <input id="field_date6" type="datetime-local" class="form-control" name="date6" formControlName="date6" placeholder="YYYY-MM-DD HH:mm"/>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="zeemonApp.content.date7" for="field_date7">Date 7</label>
+                    <div class="d-flex">
+                        <input id="field_date7" type="datetime-local" class="form-control" name="date7" formControlName="date7" placeholder="YYYY-MM-DD HH:mm"/>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="zeemonApp.content.date8" for="field_date8">Date 8</label>
+                    <div class="d-flex">
+                        <input id="field_date8" type="datetime-local" class="form-control" name="date8" formControlName="date8" placeholder="YYYY-MM-DD HH:mm"/>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="zeemonApp.content.date9" for="field_date9">Date 9</label>
+                    <div class="d-flex">
+                        <input id="field_date9" type="datetime-local" class="form-control" name="date9" formControlName="date9" placeholder="YYYY-MM-DD HH:mm"/>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="zeemonApp.content.date10" for="field_date10">Date 10</label>
+                    <div class="d-flex">
+                        <input id="field_date10" type="datetime-local" class="form-control" name="date10" formControlName="date10" placeholder="YYYY-MM-DD HH:mm"/>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="zeemonApp.content.bool1" for="field_bool1">Bool 1</label>
+                    <div class="d-flex">
+                        <input id="field_bool1" type="datetime-local" class="form-control" name="bool1" formControlName="bool1" placeholder="YYYY-MM-DD HH:mm"/>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="zeemonApp.content.bool2" for="field_bool2">Bool 2</label>
+                    <div class="d-flex">
+                        <input id="field_bool2" type="datetime-local" class="form-control" name="bool2" formControlName="bool2" placeholder="YYYY-MM-DD HH:mm"/>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="zeemonApp.content.bool3" for="field_bool3">Bool 3</label>
+                    <div class="d-flex">
+                        <input id="field_bool3" type="datetime-local" class="form-control" name="bool3" formControlName="bool3" placeholder="YYYY-MM-DD HH:mm"/>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="zeemonApp.content.bool4" for="field_bool4">Bool 4</label>
+                    <div class="d-flex">
+                        <input id="field_bool4" type="datetime-local" class="form-control" name="bool4" formControlName="bool4" placeholder="YYYY-MM-DD HH:mm"/>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="zeemonApp.content.bool5" for="field_bool5">Bool 5</label>
+                    <div class="d-flex">
+                        <input id="field_bool5" type="datetime-local" class="form-control" name="bool5" formControlName="bool5" placeholder="YYYY-MM-DD HH:mm"/>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="zeemonApp.content.checkScript" for="field_checkScript">Check Script</label>
+                    <select class="form-control" id="field_checkScript" name="checkScript" formControlName="checkScript">
+                        <option *ngIf="!editForm.get('checkScript')!.value" [ngValue]="null" selected></option>
+                        <option [ngValue]="checkScriptOption.id === editForm.get('checkScript')!.value?.id ? editForm.get('checkScript')!.value : checkScriptOption" *ngFor="let checkScriptOption of checkscripts; trackBy: trackById">{{ checkScriptOption.scriptName }}</option>
+                    </select>
+                </div>
+                <div *ngIf="editForm.get('checkScript')!.invalid && (editForm.get('checkScript')!.dirty || editForm.get('checkScript')!.touched)">
+                    <small class="form-text text-danger"
+                           *ngIf="editForm.get('checkScript')?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                    </small>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="zeemonApp.content.flow" for="field_flow">Flow</label>
+                    <select class="form-control" id="field_flow" name="flow" formControlName="flow">
+                        <option *ngIf="!editForm.get('flow')!.value" [ngValue]="null" selected></option>
+                        <option [ngValue]="flowOption.id === editForm.get('flow')!.value?.id ? editForm.get('flow')!.value : flowOption" *ngFor="let flowOption of flows; trackBy: trackById">{{ flowOption.flowName }}</option>
+                    </select>
+                </div>
+                <div *ngIf="editForm.get('flow')!.invalid && (editForm.get('flow')!.dirty || editForm.get('flow')!.touched)">
+                    <small class="form-text text-danger"
+                           *ngIf="editForm.get('flow')?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                    </small>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="zeemonApp.content.task" for="field_task">Task</label>
+                    <select class="form-control" id="field_task" name="task" formControlName="task">
+                        <option *ngIf="!editForm.get('task')!.value" [ngValue]="null" selected></option>
+                        <option [ngValue]="taskOption.id === editForm.get('task')!.value?.id ? editForm.get('task')!.value : taskOption" *ngFor="let taskOption of tasks; trackBy: trackById">{{ taskOption.taskName }}</option>
+                    </select>
+                </div>
+                <div *ngIf="editForm.get('task')!.invalid && (editForm.get('task')!.dirty || editForm.get('task')!.touched)">
+                    <small class="form-text text-danger"
+                           *ngIf="editForm.get('task')?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                    </small>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="zeemonApp.content.taskExecution" for="field_taskExecution">Task Execution</label>
+                    <select class="form-control" id="field_taskExecution" name="taskExecution" formControlName="taskExecution">
+                        <option *ngIf="!editForm.get('taskExecution')!.value" [ngValue]="null" selected></option>
+                        <option [ngValue]="taskExecutionOption.id === editForm.get('taskExecution')!.value?.id ? editForm.get('taskExecution')!.value : taskExecutionOption" *ngFor="let taskExecutionOption of taskexecutions; trackBy: trackById">{{ taskExecutionOption.id }}</option>
+                    </select>
+                </div>
+                <div *ngIf="editForm.get('taskExecution')!.invalid && (editForm.get('taskExecution')!.dirty || editForm.get('taskExecution')!.touched)">
+                    <small class="form-text text-danger"
+                           *ngIf="editForm.get('taskExecution')?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                    </small>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="zeemonApp.content.flowExecution" for="field_flowExecution">Flow Execution</label>
+                    <select class="form-control" id="field_flowExecution" name="flowExecution" formControlName="flowExecution">
+                        <option *ngIf="!editForm.get('flowExecution')!.value" [ngValue]="null" selected></option>
+                        <option [ngValue]="flowExecutionOption.id === editForm.get('flowExecution')!.value?.id ? editForm.get('flowExecution')!.value : flowExecutionOption" *ngFor="let flowExecutionOption of flowexecutions; trackBy: trackById">{{ flowExecutionOption.id }}</option>
+                    </select>
+                </div>
+                <div *ngIf="editForm.get('flowExecution')!.invalid && (editForm.get('flowExecution')!.dirty || editForm.get('flowExecution')!.touched)">
+                    <small class="form-text text-danger"
+                           *ngIf="editForm.get('flowExecution')?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                    </small>
+                </div>
+            </div>
+
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
+                    <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+                </button>
+
+                <button type="submit" id="save-entity" [disabled]="editForm.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

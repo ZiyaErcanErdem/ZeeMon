@@ -1,0 +1,60 @@
+{
+    "name": "ScriptParam",
+    "fields": [
+        {
+            "fieldName": "paramName",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required",
+                "maxlength"
+            ],
+            "fieldValidateRulesMaxlength": 255
+        },
+        {
+            "fieldName": "paramDataType",
+            "fieldType": "DataType",
+            "fieldValues": "STRING,NUMBER,DATE,BOOLEAN",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "paramValue",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "maxlength"
+            ],
+            "fieldValidateRulesMaxlength": 255
+        },
+        {
+            "fieldName": "paramExpression",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "maxlength"
+            ],
+            "fieldValidateRulesMaxlength": 255
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "checkScript",
+            "otherEntityRelationshipName": "scriptParam",
+            "relationshipValidateRules": "required",
+            "relationshipName": "checkScript",
+            "otherEntityField": "scriptName"
+        }
+    ],
+    "changelogDate": "20191031122722",
+    "entityTableName": "script_param",
+    "dto": "no",
+    "pagination": "pagination",
+    "service": "serviceClass",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": [
+        "zeemon"
+    ],
+    "microserviceName": "zeemonManager"
+}

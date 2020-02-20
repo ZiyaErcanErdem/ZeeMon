@@ -1,0 +1,87 @@
+<div>
+    <h2 id="page-heading">
+        <span jhiTranslate="zeemonApp.flowExecution.home.title">Flow Executions</span>
+
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-flow-execution" [routerLink]="['/flow-execution/new']">
+            <fa-icon icon="plus"></fa-icon>
+            <span  jhiTranslate="zeemonApp.flowExecution.home.createLabel">
+            Create a new Flow Execution
+            </span>
+        </button>
+    </h2>
+
+    <jhi-alert-error></jhi-alert-error>
+
+    <jhi-alert></jhi-alert>
+
+    <div class="alert alert-warning" id="no-result" *ngIf="flowExecutions?.length === 0">
+        <span jhiTranslate="zeemonApp.flowExecution.home.notFound">No flowExecutions found</span>
+    </div>
+
+    <div class="table-responsive" id="entities" *ngIf="flowExecutions?.length > 0">
+        <table class="table table-striped" aria-describedby="page-heading">
+            <thead>
+                <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" [callback]="loadPage.bind(this)">
+                    <th scope="col"  jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="executionStartTime"><span jhiTranslate="zeemonApp.flowExecution.executionStartTime">Execution Start Time</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="executionEndTime"><span jhiTranslate="zeemonApp.flowExecution.executionEndTime">Execution End Time</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="totalTaskCount"><span jhiTranslate="zeemonApp.flowExecution.totalTaskCount">Total Task Count</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="runningTaskCount"><span jhiTranslate="zeemonApp.flowExecution.runningTaskCount">Running Task Count</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="errorTaskCount"><span jhiTranslate="zeemonApp.flowExecution.errorTaskCount">Error Task Count</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="executionStatus"><span jhiTranslate="zeemonApp.flowExecution.executionStatus">Execution Status</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="flow.flowName"><span jhiTranslate="zeemonApp.flowExecution.flow">Flow</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let flowExecution of flowExecutions ;trackBy: trackId">
+                    <td><a [routerLink]="['/flow-execution', flowExecution.id, 'view']">{{ flowExecution.id }}</a></td>
+                    <td>{{ flowExecution.executionStartTime | date:'medium' }}</td>
+                    <td>{{ flowExecution.executionEndTime | date:'medium' }}</td>
+                    <td>{{ flowExecution.totalTaskCount }}</td>
+                    <td>{{ flowExecution.runningTaskCount }}</td>
+                    <td>{{ flowExecution.errorTaskCount }}</td>
+                    <td jhiTranslate="{{ 'zeemonApp.ExecutionStatus.' + flowExecution.executionStatus }}">{{ flowExecution.executionStatus }}</td>
+                    <td>
+                        <div *ngIf="flowExecution.flow">
+                            <a [routerLink]="['/flow', flowExecution.flow?.id, 'view']" >{{ flowExecution.flow?.flowName }}</a>
+                        </div>
+                    </td>
+                    <td class="text-right">
+                        <div class="btn-group">
+                            <button type="submit"
+                                    [routerLink]="['/flow-execution', flowExecution.id, 'view']"
+                                    class="btn btn-info btn-sm">
+                                <fa-icon icon="eye"></fa-icon>
+                                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                            </button>
+
+                            <button type="submit"
+                                    [routerLink]="['/flow-execution', flowExecution.id, 'edit']"
+                                    class="btn btn-primary btn-sm">
+                                <fa-icon icon="pencil-alt"></fa-icon>
+                                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                            </button>
+
+                            <button type="submit" (click)="delete(flowExecution)"
+                                    class="btn btn-danger btn-sm">
+                                <fa-icon icon="times"></fa-icon>
+                                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div *ngIf="flowExecutions?.length > 0">
+        <div class="row justify-content-center">
+            <jhi-item-count [page]="page" [total]="totalItems" [itemsPerPage]="itemsPerPage"></jhi-item-count>
+        </div>
+
+        <div class="row justify-content-center">
+            <ngb-pagination [collectionSize]="totalItems" [(page)]="ngbPaginationPage" [pageSize]="itemsPerPage" [maxSize]="5" [rotate]="true" [boundaryLinks]="true" (pageChange)="loadPage($event)"></ngb-pagination>
+        </div>
+    </div>
+</div>

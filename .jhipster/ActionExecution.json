@@ -1,0 +1,57 @@
+{
+    "name": "ActionExecution",
+    "fields": [
+        {
+            "fieldName": "executionStartTime",
+            "fieldType": "Instant",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "executionEndTime",
+            "fieldType": "Instant",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "executionStatus",
+            "fieldType": "ExecutionStatus",
+            "fieldValues": "PENDING,EXECUTING,CANCELLED,SUCCESS,FAILED",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "actionLog",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "maxlength"
+            ],
+            "fieldValidateRulesMaxlength": 2048
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "action",
+            "otherEntityRelationshipName": "actionExecution",
+            "relationshipValidateRules": "required",
+            "relationshipName": "action",
+            "otherEntityField": "actionName"
+        }
+    ],
+    "changelogDate": "20191031122715",
+    "entityTableName": "action_execution",
+    "dto": "no",
+    "pagination": "pagination",
+    "service": "serviceClass",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": [
+        "zeemon"
+    ],
+    "microserviceName": "zeemonManager"
+}

@@ -1,0 +1,112 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+            <h2 id="jhi-action-heading" jhiTranslate="zeemonApp.action.home.createOrEditLabel">Create or edit a Action</h2>
+
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+
+                <div class="form-group" [hidden]="!editForm.get('id')!.value">
+                    <label for="id" jhiTranslate="global.field.id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id" formControlName="id" readonly />
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="zeemonApp.action.actionName" for="field_actionName">Action Name</label>
+                    <input type="text" class="form-control" name="actionName" id="field_actionName"
+                           formControlName="actionName"/>
+                    <div *ngIf="editForm.get('actionName')!.invalid && (editForm.get('actionName')!.dirty || editForm.get('actionName')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('actionName')?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('actionName')?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: 255 }">
+                        This field cannot be longer than 255 characters.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="zeemonApp.action.actionDescription" for="field_actionDescription">Action Description</label>
+                    <input type="text" class="form-control" name="actionDescription" id="field_actionDescription"
+                           formControlName="actionDescription"/>
+                    <div *ngIf="editForm.get('actionDescription')!.invalid && (editForm.get('actionDescription')!.dirty || editForm.get('actionDescription')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('actionDescription')?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: 512 }">
+                        This field cannot be longer than 512 characters.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="zeemonApp.action.nextExecutionStartTime" for="field_nextExecutionStartTime">Next Execution Start Time</label>
+                    <div class="d-flex">
+                        <input id="field_nextExecutionStartTime" type="datetime-local" class="form-control" name="nextExecutionStartTime" formControlName="nextExecutionStartTime" placeholder="YYYY-MM-DD HH:mm"/>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="zeemonApp.action.actionState" for="field_actionState">Action State</label>
+                    <select class="form-control" name="actionState" formControlName="actionState" id="field_actionState">
+                        <option value="PENDING">{{ 'zeemonApp.ActionState.PENDING' | translate }}</option>
+                        <option value="PAUSED">{{ 'zeemonApp.ActionState.PAUSED' | translate }}</option>
+                        <option value="PROCESSING">{{ 'zeemonApp.ActionState.PROCESSING' | translate }}</option>
+                        <option value="COMPLETED">{{ 'zeemonApp.ActionState.COMPLETED' | translate }}</option>
+                        <option value="RESOLVED">{{ 'zeemonApp.ActionState.RESOLVED' | translate }}</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="zeemonApp.action.resolutionRuleExpression" for="field_resolutionRuleExpression">Resolution Rule Expression</label>
+                    <input type="text" class="form-control" name="resolutionRuleExpression" id="field_resolutionRuleExpression"
+                           formControlName="resolutionRuleExpression"/>
+                    <div *ngIf="editForm.get('resolutionRuleExpression')!.invalid && (editForm.get('resolutionRuleExpression')!.dirty || editForm.get('resolutionRuleExpression')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('resolutionRuleExpression')?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: 2048 }">
+                        This field cannot be longer than 2048 characters.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="zeemonApp.action.agent" for="field_agent">Agent</label>
+                    <select class="form-control" id="field_agent" name="agent" formControlName="agent">
+                        <option *ngIf="!editForm.get('agent')!.value" [ngValue]="null" selected></option>
+                        <option [ngValue]="agentOption.id === editForm.get('agent')!.value?.id ? editForm.get('agent')!.value : agentOption" *ngFor="let agentOption of agents; trackBy: trackById">{{ agentOption.agentName }}</option>
+                    </select>
+                </div>
+                <div *ngIf="editForm.get('agent')!.invalid && (editForm.get('agent')!.dirty || editForm.get('agent')!.touched)">
+                    <small class="form-text text-danger"
+                           *ngIf="editForm.get('agent')?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                    </small>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="zeemonApp.action.actionScript" for="field_actionScript">Action Script</label>
+                    <select class="form-control" id="field_actionScript" name="actionScript" formControlName="actionScript">
+                        <option *ngIf="!editForm.get('actionScript')!.value" [ngValue]="null" selected></option>
+                        <option [ngValue]="actionScriptOption.id === editForm.get('actionScript')!.value?.id ? editForm.get('actionScript')!.value : actionScriptOption" *ngFor="let actionScriptOption of actionscripts; trackBy: trackById">{{ actionScriptOption.actionName }}</option>
+                    </select>
+                </div>
+                <div *ngIf="editForm.get('actionScript')!.invalid && (editForm.get('actionScript')!.dirty || editForm.get('actionScript')!.touched)">
+                    <small class="form-text text-danger"
+                           *ngIf="editForm.get('actionScript')?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                    </small>
+                </div>
+            </div>
+
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
+                    <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+                </button>
+
+                <button type="submit" id="save-entity" [disabled]="editForm.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

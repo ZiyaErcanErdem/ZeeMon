@@ -1,0 +1,46 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="endpoint">
+            <h2><span jhiTranslate="zeemonApp.endpoint.detail.title">Endpoint</span> {{ endpoint.id }}</h2>
+
+            <hr>
+
+            <jhi-alert-error></jhi-alert-error>
+
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="zeemonApp.endpoint.endpointName">Endpoint Name</span></dt>
+                <dd>
+                    <span>{{ endpoint.endpointName }}</span>
+                </dd>
+                <dt><span jhiTranslate="zeemonApp.endpoint.endpointInstanceId">Endpoint Instance Id</span></dt>
+                <dd>
+                    <span>{{ endpoint.endpointInstanceId }}</span>
+                </dd>
+                <dt><span jhiTranslate="zeemonApp.endpoint.endpointType">Endpoint Type</span></dt>
+                <dd>
+                    <span jhiTranslate="{{ 'zeemonApp.EndpointType.' + endpoint.endpointType }}">{{ endpoint.endpointType }}</span>
+                </dd>
+                <dt><span jhiTranslate="zeemonApp.endpoint.endpointSpec">Endpoint Spec</span></dt>
+                <dd>
+                    <span jhiTranslate="{{ 'zeemonApp.EndpointSpec.' + endpoint.endpointSpec }}">{{ endpoint.endpointSpec }}</span>
+                </dd>
+                <dt><span jhiTranslate="zeemonApp.endpoint.endpointDescription">Endpoint Description</span></dt>
+                <dd>
+                    <span>{{ endpoint.endpointDescription }}</span>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/endpoint', endpoint.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

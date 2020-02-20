@@ -1,0 +1,98 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+            <h2 id="jhi-event-trigger-heading" jhiTranslate="zeemonApp.eventTrigger.home.createOrEditLabel">Create or edit a Event Trigger</h2>
+
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+
+                <div class="form-group" [hidden]="!editForm.get('id')!.value">
+                    <label for="id" jhiTranslate="global.field.id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id" formControlName="id" readonly />
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="zeemonApp.eventTrigger.triggerName" for="field_triggerName">Trigger Name</label>
+                    <input type="text" class="form-control" name="triggerName" id="field_triggerName"
+                           formControlName="triggerName"/>
+                    <div *ngIf="editForm.get('triggerName')!.invalid && (editForm.get('triggerName')!.dirty || editForm.get('triggerName')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('triggerName')?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('triggerName')?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: 100 }">
+                        This field cannot be longer than 100 characters.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="zeemonApp.eventTrigger.triggerType" for="field_triggerType">Trigger Type</label>
+                    <select class="form-control" name="triggerType" formControlName="triggerType" id="field_triggerType">
+                        <option value="MANUAL">{{ 'zeemonApp.TriggerType.MANUAL' | translate }}</option>
+                        <option value="PERIODIC">{{ 'zeemonApp.TriggerType.PERIODIC' | translate }}</option>
+                        <option value="CRON">{{ 'zeemonApp.TriggerType.CRON' | translate }}</option>
+                        <option value="EVENT">{{ 'zeemonApp.TriggerType.EVENT' | translate }}</option>
+                    </select>
+                    <div *ngIf="editForm.get('triggerType')!.invalid && (editForm.get('triggerType')!.dirty || editForm.get('triggerType')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('triggerType')?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="zeemonApp.eventTrigger.triggerPeriod" for="field_triggerPeriod">Trigger Period</label>
+                    <input type="number" class="form-control" name="triggerPeriod" id="field_triggerPeriod"
+                           formControlName="triggerPeriod"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="zeemonApp.eventTrigger.triggerTimeUnit" for="field_triggerTimeUnit">Trigger Time Unit</label>
+                    <select class="form-control" name="triggerTimeUnit" formControlName="triggerTimeUnit" id="field_triggerTimeUnit">
+                        <option value="SECOND">{{ 'zeemonApp.TimeUnit.SECOND' | translate }}</option>
+                        <option value="MINUTE">{{ 'zeemonApp.TimeUnit.MINUTE' | translate }}</option>
+                        <option value="HOUR">{{ 'zeemonApp.TimeUnit.HOUR' | translate }}</option>
+                        <option value="DAY">{{ 'zeemonApp.TimeUnit.DAY' | translate }}</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="zeemonApp.eventTrigger.triggerCronExpression" for="field_triggerCronExpression">Trigger Cron Expression</label>
+                    <input type="text" class="form-control" name="triggerCronExpression" id="field_triggerCronExpression"
+                           formControlName="triggerCronExpression"/>
+                    <div *ngIf="editForm.get('triggerCronExpression')!.invalid && (editForm.get('triggerCronExpression')!.dirty || editForm.get('triggerCronExpression')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('triggerCronExpression')?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: 255 }">
+                        This field cannot be longer than 255 characters.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="zeemonApp.eventTrigger.triggerCronTimeZone" for="field_triggerCronTimeZone">Trigger Cron Time Zone</label>
+                    <input type="text" class="form-control" name="triggerCronTimeZone" id="field_triggerCronTimeZone"
+                           formControlName="triggerCronTimeZone"/>
+                    <div *ngIf="editForm.get('triggerCronTimeZone')!.invalid && (editForm.get('triggerCronTimeZone')!.dirty || editForm.get('triggerCronTimeZone')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('triggerCronTimeZone')?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: 255 }">
+                        This field cannot be longer than 255 characters.
+                        </small>
+                    </div>
+                </div>
+            </div>
+
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
+                    <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+                </button>
+
+                <button type="submit" id="save-entity" [disabled]="editForm.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

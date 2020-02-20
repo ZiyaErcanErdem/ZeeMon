@@ -1,0 +1,112 @@
+import { TestBed, getTestBed } from '@angular/core/testing';
+import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
+import { EndpointService } from 'app/entities/endpoint/endpoint.service';
+import { IEndpoint, Endpoint } from 'app/shared/model/endpoint.model';
+import { EndpointType } from 'app/shared/model/enumerations/endpoint-type.model';
+import { EndpointSpec } from 'app/shared/model/enumerations/endpoint-spec.model';
+
+describe('Service Tests', () => {
+  describe('Endpoint Service', () => {
+    let injector: TestBed;
+    let service: EndpointService;
+    let httpMock: HttpTestingController;
+    let elemDefault: IEndpoint;
+    let expectedResult: IEndpoint | IEndpoint[] | boolean | null;
+
+    beforeEach(() => {
+      TestBed.configureTestingModule({
+        imports: [HttpClientTestingModule]
+      });
+      expectedResult = null;
+      injector = getTestBed();
+      service = injector.get(EndpointService);
+      httpMock = injector.get(HttpTestingController);
+
+      elemDefault = new Endpoint(0, 'AAAAAAA', 'AAAAAAA', EndpointType.DATABASE, EndpointSpec.ANY, 'AAAAAAA');
+    });
+
+    describe('Service methods', () => {
+      it('should find an element', () => {
+        const returnedFromService = Object.assign({}, elemDefault);
+
+        service.find(123).subscribe(resp => (expectedResult = resp.body));
+
+        const req = httpMock.expectOne({ method: 'GET' });
+        req.flush(returnedFromService);
+        expect(expectedResult).toMatchObject(elemDefault);
+      });
+
+      it('should create a Endpoint', () => {
+        const returnedFromService = Object.assign(
+          {
+            id: 0
+          },
+          elemDefault
+        );
+
+        const expected = Object.assign({}, returnedFromService);
+
+        service.create(new Endpoint()).subscribe(resp => (expectedResult = resp.body));
+
+        const req = httpMock.expectOne({ method: 'POST' });
+        req.flush(returnedFromService);
+        expect(expectedResult).toMatchObject(expected);
+      });
+
+      it('should update a Endpoint', () => {
+        const returnedFromService = Object.assign(
+          {
+            endpointName: 'BBBBBB',
+            endpointInstanceId: 'BBBBBB',
+            endpointType: 'BBBBBB',
+            endpointSpec: 'BBBBBB',
+            endpointDescription: 'BBBBBB'
+          },
+          elemDefault
+        );
+
+        const expected = Object.assign({}, returnedFromService);
+
+        service.update(expected).subscribe(resp => (expectedResult = resp.body));
+
+        const req = httpMock.expectOne({ method: 'PUT' });
+        req.flush(returnedFromService);
+        expect(expectedResult).toMatchObject(expected);
+      });
+
+      it('should return a list of Endpoint', () => {
+        const returnedFromService = Object.assign(
+          {
+            endpointName: 'BBBBBB',
+            endpointInstanceId: 'BBBBBB',
+            endpointType: 'BBBBBB',
+            endpointSpec: 'BBBBBB',
+            endpointDescription: 'BBBBBB'
+          },
+          elemDefault
+        );
+
+        const expected = Object.assign({}, returnedFromService);
+
+        service.query().subscribe(resp => (expectedResult = resp.body));
+
+        const req = httpMock.expectOne({ method: 'GET' });
+        req.flush([returnedFromService]);
+        httpMock.verify();
+        expect(expectedResult).toContainEqual(expected);
+      });
+
+      it('should delete a Endpoint', () => {
+        service.delete(123).subscribe(resp => (expectedResult = resp.ok));
+
+        const req = httpMock.expectOne({ method: 'DELETE' });
+        req.flush({ status: 200 });
+        expect(expectedResult);
+      });
+    });
+
+    afterEach(() => {
+      httpMock.verify();
+    });
+  });
+});

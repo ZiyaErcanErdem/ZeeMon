@@ -1,0 +1,77 @@
+<div>
+    <h2 id="page-heading">
+        <span jhiTranslate="zeemonApp.contentMapper.home.title">Content Mappers</span>
+
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-content-mapper" [routerLink]="['/content-mapper/new']">
+            <fa-icon icon="plus"></fa-icon>
+            <span  jhiTranslate="zeemonApp.contentMapper.home.createLabel">
+            Create a new Content Mapper
+            </span>
+        </button>
+    </h2>
+
+    <jhi-alert-error></jhi-alert-error>
+
+    <jhi-alert></jhi-alert>
+
+    <div class="alert alert-warning" id="no-result" *ngIf="contentMappers?.length === 0">
+        <span jhiTranslate="zeemonApp.contentMapper.home.notFound">No contentMappers found</span>
+    </div>
+
+    <div class="table-responsive" id="entities" *ngIf="contentMappers?.length > 0">
+        <table class="table table-striped" aria-describedby="page-heading">
+            <thead>
+                <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" [callback]="loadPage.bind(this)">
+                    <th scope="col"  jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="mapperName"><span jhiTranslate="zeemonApp.contentMapper.mapperName">Mapper Name</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="itemFormat"><span jhiTranslate="zeemonApp.contentMapper.itemFormat">Item Format</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="containsHeader"><span jhiTranslate="zeemonApp.contentMapper.containsHeader">Contains Header</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="fieldDelimiter"><span jhiTranslate="zeemonApp.contentMapper.fieldDelimiter">Field Delimiter</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let contentMapper of contentMappers ;trackBy: trackId">
+                    <td><a [routerLink]="['/content-mapper', contentMapper.id, 'view']">{{ contentMapper.id }}</a></td>
+                    <td>{{ contentMapper.mapperName }}</td>
+                    <td jhiTranslate="{{ 'zeemonApp.ItemFormat.' + contentMapper.itemFormat }}">{{ contentMapper.itemFormat }}</td>
+                    <td>{{ contentMapper.containsHeader }}</td>
+                    <td>{{ contentMapper.fieldDelimiter }}</td>
+                    <td class="text-right">
+                        <div class="btn-group">
+                            <button type="submit"
+                                    [routerLink]="['/content-mapper', contentMapper.id, 'view']"
+                                    class="btn btn-info btn-sm">
+                                <fa-icon icon="eye"></fa-icon>
+                                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                            </button>
+
+                            <button type="submit"
+                                    [routerLink]="['/content-mapper', contentMapper.id, 'edit']"
+                                    class="btn btn-primary btn-sm">
+                                <fa-icon icon="pencil-alt"></fa-icon>
+                                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                            </button>
+
+                            <button type="submit" (click)="delete(contentMapper)"
+                                    class="btn btn-danger btn-sm">
+                                <fa-icon icon="times"></fa-icon>
+                                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div *ngIf="contentMappers?.length > 0">
+        <div class="row justify-content-center">
+            <jhi-item-count [page]="page" [total]="totalItems" [itemsPerPage]="itemsPerPage"></jhi-item-count>
+        </div>
+
+        <div class="row justify-content-center">
+            <ngb-pagination [collectionSize]="totalItems" [(page)]="ngbPaginationPage" [pageSize]="itemsPerPage" [maxSize]="5" [rotate]="true" [boundaryLinks]="true" (pageChange)="loadPage($event)"></ngb-pagination>
+        </div>
+    </div>
+</div>

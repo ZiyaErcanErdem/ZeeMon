@@ -1,0 +1,52 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="endpointProperty">
+            <h2><span jhiTranslate="zeemonApp.endpointProperty.detail.title">Endpoint Property</span> {{ endpointProperty.id }}</h2>
+
+            <hr>
+
+            <jhi-alert-error></jhi-alert-error>
+
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="zeemonApp.endpointProperty.propKey">Prop Key</span></dt>
+                <dd>
+                    <span>{{ endpointProperty.propKey }}</span>
+                </dd>
+                <dt><span jhiTranslate="zeemonApp.endpointProperty.propKeyType">Prop Key Type</span></dt>
+                <dd>
+                    <span jhiTranslate="{{ 'zeemonApp.PropKeyType.' + endpointProperty.propKeyType }}">{{ endpointProperty.propKeyType }}</span>
+                </dd>
+                <dt><span jhiTranslate="zeemonApp.endpointProperty.propValue">Prop Value</span></dt>
+                <dd>
+                    <span>{{ endpointProperty.propValue }}</span>
+                </dd>
+                <dt><span jhiTranslate="zeemonApp.endpointProperty.propValueType">Prop Value Type</span></dt>
+                <dd>
+                    <span jhiTranslate="{{ 'zeemonApp.DataType.' + endpointProperty.propValueType }}">{{ endpointProperty.propValueType }}</span>
+                </dd>
+                <dt><span jhiTranslate="zeemonApp.endpointProperty.propDescription">Prop Description</span></dt>
+                <dd>
+                    <span>{{ endpointProperty.propDescription }}</span>
+                </dd>
+                <dt><span jhiTranslate="zeemonApp.endpointProperty.endpoint">Endpoint</span></dt>
+                <dd>
+                    <div *ngIf="endpointProperty.endpoint">
+                        <a [routerLink]="['/endpoint', endpointProperty.endpoint?.id, 'view']">{{ endpointProperty.endpoint?.endpointName }}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/endpoint-property', endpointProperty.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

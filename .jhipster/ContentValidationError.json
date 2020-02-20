@@ -1,0 +1,60 @@
+{
+    "name": "ContentValidationError",
+    "fields": [
+        {
+            "fieldName": "sourceIndex",
+            "fieldType": "Integer",
+            "fieldValidateRules": [
+                "required",
+                "min"
+            ],
+            "fieldValidateRulesMin": 0
+        },
+        {
+            "fieldName": "sourceText",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "maxlength"
+            ],
+            "fieldValidateRulesMaxlength": 2048
+        },
+        {
+            "fieldName": "errorText",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "maxlength"
+            ],
+            "fieldValidateRulesMaxlength": 2048
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "task",
+            "otherEntityRelationshipName": "contentValidationError",
+            "relationshipValidateRules": "required",
+            "relationshipName": "task",
+            "otherEntityField": "taskName"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "taskExecution",
+            "otherEntityRelationshipName": "contentValidationError",
+            "relationshipValidateRules": "required",
+            "relationshipName": "taskExecution",
+            "otherEntityField": "id"
+        }
+    ],
+    "changelogDate": "20191031122727",
+    "entityTableName": "content_validation_error",
+    "dto": "no",
+    "pagination": "pagination",
+    "service": "serviceClass",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": [
+        "zeemon"
+    ],
+    "microserviceName": "zeemonManager"
+}

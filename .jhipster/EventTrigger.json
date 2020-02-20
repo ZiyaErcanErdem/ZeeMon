@@ -1,0 +1,67 @@
+{
+    "name": "EventTrigger",
+    "fields": [
+        {
+            "fieldName": "triggerName",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required",
+                "maxlength"
+            ],
+            "fieldValidateRulesMaxlength": 100
+        },
+        {
+            "fieldName": "triggerType",
+            "fieldType": "TriggerType",
+            "fieldValues": "MANUAL,PERIODIC,CRON,EVENT",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "triggerPeriod",
+            "fieldType": "Long"
+        },
+        {
+            "fieldName": "triggerTimeUnit",
+            "fieldType": "TimeUnit",
+            "fieldValues": "SECOND,MINUTE,HOUR,DAY"
+        },
+        {
+            "fieldName": "triggerCronExpression",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "maxlength"
+            ],
+            "fieldValidateRulesMaxlength": 255
+        },
+        {
+            "fieldName": "triggerCronTimeZone",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "maxlength"
+            ],
+            "fieldValidateRulesMaxlength": 255
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "flow",
+            "otherEntityRelationshipName": "eventTrigger",
+            "relationshipName": "flow"
+        }
+    ],
+    "changelogDate": "20191031122718",
+    "entityTableName": "event_trigger",
+    "dto": "no",
+    "pagination": "pagination",
+    "service": "serviceClass",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": [
+        "zeemon"
+    ],
+    "microserviceName": "zeemonManager"
+}

@@ -1,0 +1,96 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+            <h2 id="jhi-action-param-heading" jhiTranslate="zeemonApp.actionParam.home.createOrEditLabel">Create or edit a Action Param</h2>
+
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+
+                <div class="form-group" [hidden]="!editForm.get('id')!.value">
+                    <label for="id" jhiTranslate="global.field.id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id" formControlName="id" readonly />
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="zeemonApp.actionParam.paramName" for="field_paramName">Param Name</label>
+                    <input type="text" class="form-control" name="paramName" id="field_paramName"
+                           formControlName="paramName"/>
+                    <div *ngIf="editForm.get('paramName')!.invalid && (editForm.get('paramName')!.dirty || editForm.get('paramName')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('paramName')?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('paramName')?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: 255 }">
+                        This field cannot be longer than 255 characters.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="zeemonApp.actionParam.paramDataType" for="field_paramDataType">Param Data Type</label>
+                    <select class="form-control" name="paramDataType" formControlName="paramDataType" id="field_paramDataType">
+                        <option value="STRING">{{ 'zeemonApp.DataType.STRING' | translate }}</option>
+                        <option value="NUMBER">{{ 'zeemonApp.DataType.NUMBER' | translate }}</option>
+                        <option value="DATE">{{ 'zeemonApp.DataType.DATE' | translate }}</option>
+                        <option value="BOOLEAN">{{ 'zeemonApp.DataType.BOOLEAN' | translate }}</option>
+                    </select>
+                    <div *ngIf="editForm.get('paramDataType')!.invalid && (editForm.get('paramDataType')!.dirty || editForm.get('paramDataType')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('paramDataType')?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="zeemonApp.actionParam.paramValue" for="field_paramValue">Param Value</label>
+                    <input type="text" class="form-control" name="paramValue" id="field_paramValue"
+                           formControlName="paramValue"/>
+                    <div *ngIf="editForm.get('paramValue')!.invalid && (editForm.get('paramValue')!.dirty || editForm.get('paramValue')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('paramValue')?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: 255 }">
+                        This field cannot be longer than 255 characters.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="zeemonApp.actionParam.paramExpression" for="field_paramExpression">Param Expression</label>
+                    <input type="text" class="form-control" name="paramExpression" id="field_paramExpression"
+                           formControlName="paramExpression"/>
+                    <div *ngIf="editForm.get('paramExpression')!.invalid && (editForm.get('paramExpression')!.dirty || editForm.get('paramExpression')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('paramExpression')?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: 255 }">
+                        This field cannot be longer than 255 characters.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="zeemonApp.actionParam.actionScript" for="field_actionScript">Action Script</label>
+                    <select class="form-control" id="field_actionScript" name="actionScript" formControlName="actionScript">
+                        <option *ngIf="!editForm.get('actionScript')!.value" [ngValue]="null" selected></option>
+                        <option [ngValue]="actionScriptOption.id === editForm.get('actionScript')!.value?.id ? editForm.get('actionScript')!.value : actionScriptOption" *ngFor="let actionScriptOption of actionscripts; trackBy: trackById">{{ actionScriptOption.scriptName }}</option>
+                    </select>
+                </div>
+                <div *ngIf="editForm.get('actionScript')!.invalid && (editForm.get('actionScript')!.dirty || editForm.get('actionScript')!.touched)">
+                    <small class="form-text text-danger"
+                           *ngIf="editForm.get('actionScript')?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                    </small>
+                </div>
+            </div>
+
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
+                    <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+                </button>
+
+                <button type="submit" id="save-entity" [disabled]="editForm.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

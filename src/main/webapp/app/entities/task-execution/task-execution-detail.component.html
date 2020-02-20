@@ -1,0 +1,50 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="taskExecution">
+            <h2><span jhiTranslate="zeemonApp.taskExecution.detail.title">Task Execution</span> {{ taskExecution.id }}</h2>
+
+            <hr>
+
+            <jhi-alert-error></jhi-alert-error>
+
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="zeemonApp.taskExecution.executionStartTime">Execution Start Time</span></dt>
+                <dd>
+                    <span>{{ taskExecution.executionStartTime }}</span>
+                </dd>
+                <dt><span jhiTranslate="zeemonApp.taskExecution.executionEndTime">Execution End Time</span></dt>
+                <dd>
+                    <span>{{ taskExecution.executionEndTime }}</span>
+                </dd>
+                <dt><span jhiTranslate="zeemonApp.taskExecution.executionStatus">Execution Status</span></dt>
+                <dd>
+                    <span jhiTranslate="{{ 'zeemonApp.ExecutionStatus.' + taskExecution.executionStatus }}">{{ taskExecution.executionStatus }}</span>
+                </dd>
+                <dt><span jhiTranslate="zeemonApp.taskExecution.task">Task</span></dt>
+                <dd>
+                    <div *ngIf="taskExecution.task">
+                        <a [routerLink]="['/task', taskExecution.task?.id, 'view']">{{ taskExecution.task?.taskName }}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="zeemonApp.taskExecution.flowExecution">Flow Execution</span></dt>
+                <dd>
+                    <div *ngIf="taskExecution.flowExecution">
+                        <a [routerLink]="['/flow-execution', taskExecution.flowExecution?.id, 'view']">{{ taskExecution.flowExecution?.id }}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/task-execution', taskExecution.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

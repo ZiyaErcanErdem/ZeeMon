@@ -1,0 +1,85 @@
+<div>
+    <h2 id="page-heading">
+        <span jhiTranslate="zeemonApp.actionScript.home.title">Action Scripts</span>
+
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-action-script" [routerLink]="['/action-script/new']">
+            <fa-icon icon="plus"></fa-icon>
+            <span  jhiTranslate="zeemonApp.actionScript.home.createLabel">
+            Create a new Action Script
+            </span>
+        </button>
+    </h2>
+
+    <jhi-alert-error></jhi-alert-error>
+
+    <jhi-alert></jhi-alert>
+
+    <div class="alert alert-warning" id="no-result" *ngIf="actionScripts?.length === 0">
+        <span jhiTranslate="zeemonApp.actionScript.home.notFound">No actionScripts found</span>
+    </div>
+
+    <div class="table-responsive" id="entities" *ngIf="actionScripts?.length > 0">
+        <table class="table table-striped" aria-describedby="page-heading">
+            <thead>
+                <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" [callback]="loadPage.bind(this)">
+                    <th scope="col"  jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="actionCode"><span jhiTranslate="zeemonApp.actionScript.actionCode">Action Code</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="scriptName"><span jhiTranslate="zeemonApp.actionScript.scriptName">Script Name</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="scriptType"><span jhiTranslate="zeemonApp.actionScript.scriptType">Script Type</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="actionType"><span jhiTranslate="zeemonApp.actionScript.actionType">Action Type</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="actionSource"><span jhiTranslate="zeemonApp.actionScript.actionSource">Action Source</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="endpoint.endpointName"><span jhiTranslate="zeemonApp.actionScript.endpoint">Endpoint</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let actionScript of actionScripts ;trackBy: trackId">
+                    <td><a [routerLink]="['/action-script', actionScript.id, 'view']">{{ actionScript.id }}</a></td>
+                    <td>{{ actionScript.actionCode }}</td>
+                    <td>{{ actionScript.scriptName }}</td>
+                    <td jhiTranslate="{{ 'zeemonApp.ScriptType.' + actionScript.scriptType }}">{{ actionScript.scriptType }}</td>
+                    <td jhiTranslate="{{ 'zeemonApp.ActionType.' + actionScript.actionType }}">{{ actionScript.actionType }}</td>
+                    <td>{{ actionScript.actionSource }}</td>
+                    <td>
+                        <div *ngIf="actionScript.endpoint">
+                            <a [routerLink]="['/endpoint', actionScript.endpoint?.id, 'view']" >{{ actionScript.endpoint?.endpointName }}</a>
+                        </div>
+                    </td>
+                    <td class="text-right">
+                        <div class="btn-group">
+                            <button type="submit"
+                                    [routerLink]="['/action-script', actionScript.id, 'view']"
+                                    class="btn btn-info btn-sm">
+                                <fa-icon icon="eye"></fa-icon>
+                                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                            </button>
+
+                            <button type="submit"
+                                    [routerLink]="['/action-script', actionScript.id, 'edit']"
+                                    class="btn btn-primary btn-sm">
+                                <fa-icon icon="pencil-alt"></fa-icon>
+                                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                            </button>
+
+                            <button type="submit" (click)="delete(actionScript)"
+                                    class="btn btn-danger btn-sm">
+                                <fa-icon icon="times"></fa-icon>
+                                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div *ngIf="actionScripts?.length > 0">
+        <div class="row justify-content-center">
+            <jhi-item-count [page]="page" [total]="totalItems" [itemsPerPage]="itemsPerPage"></jhi-item-count>
+        </div>
+
+        <div class="row justify-content-center">
+            <ngb-pagination [collectionSize]="totalItems" [(page)]="ngbPaginationPage" [pageSize]="itemsPerPage" [maxSize]="5" [rotate]="true" [boundaryLinks]="true" (pageChange)="loadPage($event)"></ngb-pagination>
+        </div>
+    </div>
+</div>

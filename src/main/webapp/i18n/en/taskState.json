@@ -1,0 +1,10 @@
+{
+  "zeemonApp": {
+    "TaskState": {
+      "null": "",
+      "PENDING": "PENDING",
+      "PAUSED": "PAUSED",
+      "PROCESSING": "PROCESSING"
+    }
+  }
+}

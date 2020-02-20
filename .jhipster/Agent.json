@@ -1,0 +1,80 @@
+{
+    "name": "Agent",
+    "fields": [
+        {
+            "fieldName": "agentName",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required",
+                "maxlength"
+            ],
+            "fieldValidateRulesMaxlength": 100
+        },
+        {
+            "fieldName": "agentInstanceId",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "maxlength"
+            ],
+            "fieldValidateRulesMaxlength": 100
+        },
+        {
+            "fieldName": "listenURI",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "maxlength"
+            ],
+            "fieldValidateRulesMaxlength": 512
+        },
+        {
+            "fieldName": "agentType",
+            "fieldType": "AgentType",
+            "fieldValues": "SQL_AGENT,SHELL_AGENT,SQL_AND_SHELL_AGENT",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "agentStatus",
+            "fieldType": "AgentStatus",
+            "fieldValues": "ACTIVE,PASSIVE,DISCONNECTED",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "agentDescription",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "maxlength"
+            ],
+            "fieldValidateRulesMaxlength": 512
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "task",
+            "otherEntityRelationshipName": "agent",
+            "relationshipName": "task"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "action",
+            "otherEntityRelationshipName": "agent",
+            "relationshipName": "action"
+        }
+    ],
+    "changelogDate": "20191031122710",
+    "entityTableName": "agent",
+    "dto": "no",
+    "pagination": "pagination",
+    "service": "serviceClass",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": [
+        "zeemon"
+    ],
+    "microserviceName": "zeemonManager"
+}

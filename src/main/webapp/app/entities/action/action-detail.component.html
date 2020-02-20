@@ -1,0 +1,58 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="action">
+            <h2><span jhiTranslate="zeemonApp.action.detail.title">Action</span> {{ action.id }}</h2>
+
+            <hr>
+
+            <jhi-alert-error></jhi-alert-error>
+
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="zeemonApp.action.actionName">Action Name</span></dt>
+                <dd>
+                    <span>{{ action.actionName }}</span>
+                </dd>
+                <dt><span jhiTranslate="zeemonApp.action.actionDescription">Action Description</span></dt>
+                <dd>
+                    <span>{{ action.actionDescription }}</span>
+                </dd>
+                <dt><span jhiTranslate="zeemonApp.action.nextExecutionStartTime">Next Execution Start Time</span></dt>
+                <dd>
+                    <span>{{ action.nextExecutionStartTime }}</span>
+                </dd>
+                <dt><span jhiTranslate="zeemonApp.action.actionState">Action State</span></dt>
+                <dd>
+                    <span jhiTranslate="{{ 'zeemonApp.ActionState.' + action.actionState }}">{{ action.actionState }}</span>
+                </dd>
+                <dt><span jhiTranslate="zeemonApp.action.resolutionRuleExpression">Resolution Rule Expression</span></dt>
+                <dd>
+                    <span>{{ action.resolutionRuleExpression }}</span>
+                </dd>
+                <dt><span jhiTranslate="zeemonApp.action.agent">Agent</span></dt>
+                <dd>
+                    <div *ngIf="action.agent">
+                        <a [routerLink]="['/agent', action.agent?.id, 'view']">{{ action.agent?.agentName }}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="zeemonApp.action.actionScript">Action Script</span></dt>
+                <dd>
+                    <div *ngIf="action.actionScript">
+                        <a [routerLink]="['/action-script', action.actionScript?.id, 'view']">{{ action.actionScript?.actionName }}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/action', action.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

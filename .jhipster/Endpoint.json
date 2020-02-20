@@ -1,0 +1,78 @@
+{
+    "name": "Endpoint",
+    "fields": [
+        {
+            "fieldName": "endpointName",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required",
+                "maxlength"
+            ],
+            "fieldValidateRulesMaxlength": 100
+        },
+        {
+            "fieldName": "endpointInstanceId",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "maxlength"
+            ],
+            "fieldValidateRulesMaxlength": 100
+        },
+        {
+            "fieldName": "endpointType",
+            "fieldType": "EndpointType",
+            "fieldValues": "DATABASE,FILE_SYSTEM,FTP,SFTP,SSH,REST,WEBSERVICE,AGENT",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "endpointSpec",
+            "fieldType": "EndpointSpec",
+            "fieldValues": "ANY,MSSQL,MYSQL,POSTGRESQL,ORACLE,MONGODB",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "endpointDescription",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "maxlength"
+            ],
+            "fieldValidateRulesMaxlength": 512
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "endpointProperty",
+            "otherEntityRelationshipName": "endpoint",
+            "relationshipName": "endpointProperty"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "checkScript",
+            "otherEntityRelationshipName": "endpoint",
+            "relationshipName": "checkScript"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "actionScript",
+            "otherEntityRelationshipName": "endpoint",
+            "relationshipName": "actionScript"
+        }
+    ],
+    "changelogDate": "20191031122712",
+    "entityTableName": "endpoint",
+    "dto": "no",
+    "pagination": "pagination",
+    "service": "serviceClass",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": [
+        "zeemon"
+    ],
+    "microserviceName": "zeemonManager"
+}

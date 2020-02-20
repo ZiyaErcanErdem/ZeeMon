@@ -1,0 +1,98 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+            <h2 id="jhi-content-validation-error-heading" jhiTranslate="zeemonApp.contentValidationError.home.createOrEditLabel">Create or edit a Content Validation Error</h2>
+
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+
+                <div class="form-group" [hidden]="!editForm.get('id')!.value">
+                    <label for="id" jhiTranslate="global.field.id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id" formControlName="id" readonly />
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="zeemonApp.contentValidationError.sourceIndex" for="field_sourceIndex">Source Index</label>
+                    <input type="number" class="form-control" name="sourceIndex" id="field_sourceIndex"
+                           formControlName="sourceIndex"/>
+                    <div *ngIf="editForm.get('sourceIndex')!.invalid && (editForm.get('sourceIndex')!.dirty || editForm.get('sourceIndex')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('sourceIndex')?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('sourceIndex')?.errors?.min" jhiTranslate="entity.validation.min" [translateValues]="{ min: 0 }">
+                            This field should be at least 0.
+                        </small>
+                        <small class="form-text text-danger"
+                            [hidden]="!editForm.get('sourceIndex')?.errors?.number" jhiTranslate="entity.validation.number">
+                            This field should be a number.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="zeemonApp.contentValidationError.sourceText" for="field_sourceText">Source Text</label>
+                    <input type="text" class="form-control" name="sourceText" id="field_sourceText"
+                           formControlName="sourceText"/>
+                    <div *ngIf="editForm.get('sourceText')!.invalid && (editForm.get('sourceText')!.dirty || editForm.get('sourceText')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('sourceText')?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: 2048 }">
+                        This field cannot be longer than 2048 characters.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="zeemonApp.contentValidationError.errorText" for="field_errorText">Error Text</label>
+                    <input type="text" class="form-control" name="errorText" id="field_errorText"
+                           formControlName="errorText"/>
+                    <div *ngIf="editForm.get('errorText')!.invalid && (editForm.get('errorText')!.dirty || editForm.get('errorText')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('errorText')?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: 2048 }">
+                        This field cannot be longer than 2048 characters.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="zeemonApp.contentValidationError.task" for="field_task">Task</label>
+                    <select class="form-control" id="field_task" name="task" formControlName="task">
+                        <option *ngIf="!editForm.get('task')!.value" [ngValue]="null" selected></option>
+                        <option [ngValue]="taskOption.id === editForm.get('task')!.value?.id ? editForm.get('task')!.value : taskOption" *ngFor="let taskOption of tasks; trackBy: trackById">{{ taskOption.taskName }}</option>
+                    </select>
+                </div>
+                <div *ngIf="editForm.get('task')!.invalid && (editForm.get('task')!.dirty || editForm.get('task')!.touched)">
+                    <small class="form-text text-danger"
+                           *ngIf="editForm.get('task')?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                    </small>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="zeemonApp.contentValidationError.taskExecution" for="field_taskExecution">Task Execution</label>
+                    <select class="form-control" id="field_taskExecution" name="taskExecution" formControlName="taskExecution">
+                        <option *ngIf="!editForm.get('taskExecution')!.value" [ngValue]="null" selected></option>
+                        <option [ngValue]="taskExecutionOption.id === editForm.get('taskExecution')!.value?.id ? editForm.get('taskExecution')!.value : taskExecutionOption" *ngFor="let taskExecutionOption of taskexecutions; trackBy: trackById">{{ taskExecutionOption.id }}</option>
+                    </select>
+                </div>
+                <div *ngIf="editForm.get('taskExecution')!.invalid && (editForm.get('taskExecution')!.dirty || editForm.get('taskExecution')!.touched)">
+                    <small class="form-text text-danger"
+                           *ngIf="editForm.get('taskExecution')?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                    </small>
+                </div>
+            </div>
+
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
+                    <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+                </button>
+
+                <button type="submit" id="save-entity" [disabled]="editForm.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

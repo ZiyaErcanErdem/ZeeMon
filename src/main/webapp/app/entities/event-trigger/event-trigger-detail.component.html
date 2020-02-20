@@ -1,0 +1,50 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="eventTrigger">
+            <h2><span jhiTranslate="zeemonApp.eventTrigger.detail.title">Event Trigger</span> {{ eventTrigger.id }}</h2>
+
+            <hr>
+
+            <jhi-alert-error></jhi-alert-error>
+
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="zeemonApp.eventTrigger.triggerName">Trigger Name</span></dt>
+                <dd>
+                    <span>{{ eventTrigger.triggerName }}</span>
+                </dd>
+                <dt><span jhiTranslate="zeemonApp.eventTrigger.triggerType">Trigger Type</span></dt>
+                <dd>
+                    <span jhiTranslate="{{ 'zeemonApp.TriggerType.' + eventTrigger.triggerType }}">{{ eventTrigger.triggerType }}</span>
+                </dd>
+                <dt><span jhiTranslate="zeemonApp.eventTrigger.triggerPeriod">Trigger Period</span></dt>
+                <dd>
+                    <span>{{ eventTrigger.triggerPeriod }}</span>
+                </dd>
+                <dt><span jhiTranslate="zeemonApp.eventTrigger.triggerTimeUnit">Trigger Time Unit</span></dt>
+                <dd>
+                    <span jhiTranslate="{{ 'zeemonApp.TimeUnit.' + eventTrigger.triggerTimeUnit }}">{{ eventTrigger.triggerTimeUnit }}</span>
+                </dd>
+                <dt><span jhiTranslate="zeemonApp.eventTrigger.triggerCronExpression">Trigger Cron Expression</span></dt>
+                <dd>
+                    <span>{{ eventTrigger.triggerCronExpression }}</span>
+                </dd>
+                <dt><span jhiTranslate="zeemonApp.eventTrigger.triggerCronTimeZone">Trigger Cron Time Zone</span></dt>
+                <dd>
+                    <span>{{ eventTrigger.triggerCronTimeZone }}</span>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/event-trigger', eventTrigger.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

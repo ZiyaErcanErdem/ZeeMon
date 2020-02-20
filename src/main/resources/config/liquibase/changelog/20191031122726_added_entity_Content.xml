@@ -1,0 +1,305 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.6.xsd
+                        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+        <property name="autoIncrement" value="true"/>
+
+    <!--
+        Added the entity Content.
+    -->
+    <changeSet id="20191031122726-1" author="jhipster">
+        <createTable tableName="content">
+            <column name="id" type="bigint" autoIncrement="${autoIncrement}">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="source_index" type="integer">
+                <constraints nullable="false" />
+            </column>
+            <column name="txt_1" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="txt_2" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="txt_3" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="txt_4" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="txt_5" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="txt_6" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="txt_7" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="txt_8" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="txt_9" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="txt_10" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="txt_11" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="txt_12" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="txt_13" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="txt_14" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="txt_15" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="txt_16" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="txt_17" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="txt_18" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="txt_19" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="txt_20" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="num_1" type="decimal(21,2)">
+                <constraints nullable="true" />
+            </column>
+            <column name="num_2" type="decimal(21,2)">
+                <constraints nullable="true" />
+            </column>
+            <column name="num_3" type="decimal(21,2)">
+                <constraints nullable="true" />
+            </column>
+            <column name="num_4" type="decimal(21,2)">
+                <constraints nullable="true" />
+            </column>
+            <column name="num_5" type="decimal(21,2)">
+                <constraints nullable="true" />
+            </column>
+            <column name="num_6" type="decimal(21,2)">
+                <constraints nullable="true" />
+            </column>
+            <column name="num_7" type="decimal(21,2)">
+                <constraints nullable="true" />
+            </column>
+            <column name="num_8" type="decimal(21,2)">
+                <constraints nullable="true" />
+            </column>
+            <column name="num_9" type="decimal(21,2)">
+                <constraints nullable="true" />
+            </column>
+            <column name="num_10" type="decimal(21,2)">
+                <constraints nullable="true" />
+            </column>
+            <column name="num_11" type="decimal(21,2)">
+                <constraints nullable="true" />
+            </column>
+            <column name="num_12" type="decimal(21,2)">
+                <constraints nullable="true" />
+            </column>
+            <column name="num_13" type="decimal(21,2)">
+                <constraints nullable="true" />
+            </column>
+            <column name="num_14" type="decimal(21,2)">
+                <constraints nullable="true" />
+            </column>
+            <column name="num_15" type="decimal(21,2)">
+                <constraints nullable="true" />
+            </column>
+            <column name="num_16" type="decimal(21,2)">
+                <constraints nullable="true" />
+            </column>
+            <column name="num_17" type="decimal(21,2)">
+                <constraints nullable="true" />
+            </column>
+            <column name="num_18" type="decimal(21,2)">
+                <constraints nullable="true" />
+            </column>
+            <column name="num_19" type="decimal(21,2)">
+                <constraints nullable="true" />
+            </column>
+            <column name="num_20" type="decimal(21,2)">
+                <constraints nullable="true" />
+            </column>
+            <column name="date_1" type="datetime">
+                <constraints nullable="true" />
+            </column>
+            <column name="date_2" type="datetime">
+                <constraints nullable="true" />
+            </column>
+            <column name="date_3" type="datetime">
+                <constraints nullable="true" />
+            </column>
+            <column name="date_4" type="datetime">
+                <constraints nullable="true" />
+            </column>
+            <column name="date_5" type="datetime">
+                <constraints nullable="true" />
+            </column>
+            <column name="date_6" type="datetime">
+                <constraints nullable="true" />
+            </column>
+            <column name="date_7" type="datetime">
+                <constraints nullable="true" />
+            </column>
+            <column name="date_8" type="datetime">
+                <constraints nullable="true" />
+            </column>
+            <column name="date_9" type="datetime">
+                <constraints nullable="true" />
+            </column>
+            <column name="date_10" type="datetime">
+                <constraints nullable="true" />
+            </column>
+            <column name="bool_1" type="datetime">
+                <constraints nullable="true" />
+            </column>
+            <column name="bool_2" type="datetime">
+                <constraints nullable="true" />
+            </column>
+            <column name="bool_3" type="datetime">
+                <constraints nullable="true" />
+            </column>
+            <column name="bool_4" type="datetime">
+                <constraints nullable="true" />
+            </column>
+            <column name="bool_5" type="datetime">
+                <constraints nullable="true" />
+            </column>
+            <column name="check_script_id" type="bigint">
+                <constraints nullable="false" />
+            </column>
+            <column name="flow_id" type="bigint">
+                <constraints nullable="false" />
+            </column>
+            <column name="task_id" type="bigint">
+                <constraints nullable="false" />
+            </column>
+            <column name="task_execution_id" type="bigint">
+                <constraints nullable="false" />
+            </column>
+            <column name="flow_execution_id" type="bigint">
+                <constraints nullable="false" />
+            </column>
+            <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here, do not remove-->
+        </createTable>
+        <dropDefaultValue tableName="content" columnName="date_1" columnDataType="datetime"/>
+        <dropDefaultValue tableName="content" columnName="date_2" columnDataType="datetime"/>
+        <dropDefaultValue tableName="content" columnName="date_3" columnDataType="datetime"/>
+        <dropDefaultValue tableName="content" columnName="date_4" columnDataType="datetime"/>
+        <dropDefaultValue tableName="content" columnName="date_5" columnDataType="datetime"/>
+        <dropDefaultValue tableName="content" columnName="date_6" columnDataType="datetime"/>
+        <dropDefaultValue tableName="content" columnName="date_7" columnDataType="datetime"/>
+        <dropDefaultValue tableName="content" columnName="date_8" columnDataType="datetime"/>
+        <dropDefaultValue tableName="content" columnName="date_9" columnDataType="datetime"/>
+        <dropDefaultValue tableName="content" columnName="date_10" columnDataType="datetime"/>
+        <dropDefaultValue tableName="content" columnName="bool_1" columnDataType="datetime"/>
+        <dropDefaultValue tableName="content" columnName="bool_2" columnDataType="datetime"/>
+        <dropDefaultValue tableName="content" columnName="bool_3" columnDataType="datetime"/>
+        <dropDefaultValue tableName="content" columnName="bool_4" columnDataType="datetime"/>
+        <dropDefaultValue tableName="content" columnName="bool_5" columnDataType="datetime"/>
+    </changeSet>
+
+    <changeSet id="20191031122726-1-relations" author="jhipster">
+
+    </changeSet>
+    <!-- jhipster-needle-liquibase-add-changeset - JHipster will add changesets here, do not remove-->
+
+    <!--
+        Load sample data generated with Faker.js
+        - This data can be easily edited using a CSV editor (or even MS Excel) and
+          is located in the 'src/main/resources/config/liquibase/fake-data' directory
+        - By default this data is applied when running with the JHipster 'dev' profile.
+          This can be customized by adding or removing 'faker' in the 'spring.liquibase.contexts'
+          Spring Boot configuration key.
+    -->
+    <changeSet id="20191031122726-1-data" author="jhipster" context="faker">
+        <loadData
+                  file="config/liquibase/fake-data/content.csv"
+                  separator=";"
+                  tableName="content">
+            <column name="id" type="numeric"/>
+            <column name="source_index" type="numeric"/>
+            <column name="txt_1" type="string"/>
+            <column name="txt_2" type="string"/>
+            <column name="txt_3" type="string"/>
+            <column name="txt_4" type="string"/>
+            <column name="txt_5" type="string"/>
+            <column name="txt_6" type="string"/>
+            <column name="txt_7" type="string"/>
+            <column name="txt_8" type="string"/>
+            <column name="txt_9" type="string"/>
+            <column name="txt_10" type="string"/>
+            <column name="txt_11" type="string"/>
+            <column name="txt_12" type="string"/>
+            <column name="txt_13" type="string"/>
+            <column name="txt_14" type="string"/>
+            <column name="txt_15" type="string"/>
+            <column name="txt_16" type="string"/>
+            <column name="txt_17" type="string"/>
+            <column name="txt_18" type="string"/>
+            <column name="txt_19" type="string"/>
+            <column name="txt_20" type="string"/>
+            <column name="num_1" type="numeric"/>
+            <column name="num_2" type="numeric"/>
+            <column name="num_3" type="numeric"/>
+            <column name="num_4" type="numeric"/>
+            <column name="num_5" type="numeric"/>
+            <column name="num_6" type="numeric"/>
+            <column name="num_7" type="numeric"/>
+            <column name="num_8" type="numeric"/>
+            <column name="num_9" type="numeric"/>
+            <column name="num_10" type="numeric"/>
+            <column name="num_11" type="numeric"/>
+            <column name="num_12" type="numeric"/>
+            <column name="num_13" type="numeric"/>
+            <column name="num_14" type="numeric"/>
+            <column name="num_15" type="numeric"/>
+            <column name="num_16" type="numeric"/>
+            <column name="num_17" type="numeric"/>
+            <column name="num_18" type="numeric"/>
+            <column name="num_19" type="numeric"/>
+            <column name="num_20" type="numeric"/>
+            <column name="date_1" type="datetime"/>
+            <column name="date_2" type="datetime"/>
+            <column name="date_3" type="datetime"/>
+            <column name="date_4" type="datetime"/>
+            <column name="date_5" type="datetime"/>
+            <column name="date_6" type="datetime"/>
+            <column name="date_7" type="datetime"/>
+            <column name="date_8" type="datetime"/>
+            <column name="date_9" type="datetime"/>
+            <column name="date_10" type="datetime"/>
+            <column name="bool_1" type="datetime"/>
+            <column name="bool_2" type="datetime"/>
+            <column name="bool_3" type="datetime"/>
+            <column name="bool_4" type="datetime"/>
+            <column name="bool_5" type="datetime"/>
+            <column name="check_script_id" type="numeric"/>
+            <column name="flow_id" type="numeric"/>
+            <column name="task_id" type="numeric"/>
+            <column name="task_execution_id" type="numeric"/>
+            <column name="flow_execution_id" type="numeric"/>
+            <!-- jhipster-needle-liquibase-add-loadcolumn - JHipster (and/or extensions) can add load columns here, do not remove-->
+        </loadData>
+    </changeSet>
+
+</databaseChangeLog>

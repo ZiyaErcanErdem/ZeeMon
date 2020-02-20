@@ -1,0 +1,103 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+            <h2 id="jhi-action-execution-heading" jhiTranslate="zeemonApp.actionExecution.home.createOrEditLabel">Create or edit a Action Execution</h2>
+
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+
+                <div class="form-group" [hidden]="!editForm.get('id')!.value">
+                    <label for="id" jhiTranslate="global.field.id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id" formControlName="id" readonly />
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="zeemonApp.actionExecution.executionStartTime" for="field_executionStartTime">Execution Start Time</label>
+                    <div class="d-flex">
+                        <input id="field_executionStartTime" type="datetime-local" class="form-control" name="executionStartTime" formControlName="executionStartTime" placeholder="YYYY-MM-DD HH:mm"/>
+                    </div>
+                    <div *ngIf="editForm.get('executionStartTime')!.invalid && (editForm.get('executionStartTime')!.dirty || editForm.get('executionStartTime')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('executionStartTime')?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                            [hidden]="!editForm.get('executionStartTime')?.errors?.ZonedDateTimelocal" jhiTranslate="entity.validation.ZonedDateTimelocal">
+                            This field should be a date and time.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="zeemonApp.actionExecution.executionEndTime" for="field_executionEndTime">Execution End Time</label>
+                    <div class="d-flex">
+                        <input id="field_executionEndTime" type="datetime-local" class="form-control" name="executionEndTime" formControlName="executionEndTime" placeholder="YYYY-MM-DD HH:mm"/>
+                    </div>
+                    <div *ngIf="editForm.get('executionEndTime')!.invalid && (editForm.get('executionEndTime')!.dirty || editForm.get('executionEndTime')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('executionEndTime')?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                            [hidden]="!editForm.get('executionEndTime')?.errors?.ZonedDateTimelocal" jhiTranslate="entity.validation.ZonedDateTimelocal">
+                            This field should be a date and time.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="zeemonApp.actionExecution.executionStatus" for="field_executionStatus">Execution Status</label>
+                    <select class="form-control" name="executionStatus" formControlName="executionStatus" id="field_executionStatus">
+                        <option value="PENDING">{{ 'zeemonApp.ExecutionStatus.PENDING' | translate }}</option>
+                        <option value="EXECUTING">{{ 'zeemonApp.ExecutionStatus.EXECUTING' | translate }}</option>
+                        <option value="CANCELLED">{{ 'zeemonApp.ExecutionStatus.CANCELLED' | translate }}</option>
+                        <option value="SUCCESS">{{ 'zeemonApp.ExecutionStatus.SUCCESS' | translate }}</option>
+                        <option value="FAILED">{{ 'zeemonApp.ExecutionStatus.FAILED' | translate }}</option>
+                    </select>
+                    <div *ngIf="editForm.get('executionStatus')!.invalid && (editForm.get('executionStatus')!.dirty || editForm.get('executionStatus')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('executionStatus')?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="zeemonApp.actionExecution.actionLog" for="field_actionLog">Action Log</label>
+                    <input type="text" class="form-control" name="actionLog" id="field_actionLog"
+                           formControlName="actionLog"/>
+                    <div *ngIf="editForm.get('actionLog')!.invalid && (editForm.get('actionLog')!.dirty || editForm.get('actionLog')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('actionLog')?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: 2048 }">
+                        This field cannot be longer than 2048 characters.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="zeemonApp.actionExecution.action" for="field_action">Action</label>
+                    <select class="form-control" id="field_action" name="action" formControlName="action">
+                        <option *ngIf="!editForm.get('action')!.value" [ngValue]="null" selected></option>
+                        <option [ngValue]="actionOption.id === editForm.get('action')!.value?.id ? editForm.get('action')!.value : actionOption" *ngFor="let actionOption of actions; trackBy: trackById">{{ actionOption.actionName }}</option>
+                    </select>
+                </div>
+                <div *ngIf="editForm.get('action')!.invalid && (editForm.get('action')!.dirty || editForm.get('action')!.touched)">
+                    <small class="form-text text-danger"
+                           *ngIf="editForm.get('action')?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                    </small>
+                </div>
+            </div>
+
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
+                    <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+                </button>
+
+                <button type="submit" id="save-entity" [disabled]="editForm.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

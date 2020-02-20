@@ -1,0 +1,368 @@
+{
+    "name": "Content",
+    "fields": [
+        {
+            "fieldName": "sourceIndex",
+            "fieldType": "Integer",
+            "fieldValidateRules": [
+                "required",
+                "min"
+            ],
+            "fieldValidateRulesMin": 0
+        },
+        {
+            "fieldName": "txt1",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "maxlength"
+            ],
+            "fieldValidateRulesMaxlength": 255
+        },
+        {
+            "fieldName": "txt2",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "maxlength"
+            ],
+            "fieldValidateRulesMaxlength": 255
+        },
+        {
+            "fieldName": "txt3",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "maxlength"
+            ],
+            "fieldValidateRulesMaxlength": 255
+        },
+        {
+            "fieldName": "txt4",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "maxlength"
+            ],
+            "fieldValidateRulesMaxlength": 255
+        },
+        {
+            "fieldName": "txt5",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "maxlength"
+            ],
+            "fieldValidateRulesMaxlength": 255
+        },
+        {
+            "fieldName": "txt6",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "maxlength"
+            ],
+            "fieldValidateRulesMaxlength": 255
+        },
+        {
+            "fieldName": "txt7",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "maxlength"
+            ],
+            "fieldValidateRulesMaxlength": 255
+        },
+        {
+            "fieldName": "txt8",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "maxlength"
+            ],
+            "fieldValidateRulesMaxlength": 255
+        },
+        {
+            "fieldName": "txt9",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "maxlength"
+            ],
+            "fieldValidateRulesMaxlength": 255
+        },
+        {
+            "fieldName": "txt10",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "maxlength"
+            ],
+            "fieldValidateRulesMaxlength": 255
+        },
+        {
+            "fieldName": "txt11",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "maxlength"
+            ],
+            "fieldValidateRulesMaxlength": 255
+        },
+        {
+            "fieldName": "txt12",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "maxlength"
+            ],
+            "fieldValidateRulesMaxlength": 255
+        },
+        {
+            "fieldName": "txt13",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "maxlength"
+            ],
+            "fieldValidateRulesMaxlength": 255
+        },
+        {
+            "fieldName": "txt14",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "maxlength"
+            ],
+            "fieldValidateRulesMaxlength": 255
+        },
+        {
+            "fieldName": "txt15",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "maxlength"
+            ],
+            "fieldValidateRulesMaxlength": 255
+        },
+        {
+            "fieldName": "txt16",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "maxlength"
+            ],
+            "fieldValidateRulesMaxlength": 255
+        },
+        {
+            "fieldName": "txt17",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "maxlength"
+            ],
+            "fieldValidateRulesMaxlength": 255
+        },
+        {
+            "fieldName": "txt18",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "maxlength"
+            ],
+            "fieldValidateRulesMaxlength": 255
+        },
+        {
+            "fieldName": "txt19",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "maxlength"
+            ],
+            "fieldValidateRulesMaxlength": 255
+        },
+        {
+            "fieldName": "txt20",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "maxlength"
+            ],
+            "fieldValidateRulesMaxlength": 255
+        },
+        {
+            "fieldName": "num1",
+            "fieldType": "BigDecimal"
+        },
+        {
+            "fieldName": "num2",
+            "fieldType": "BigDecimal"
+        },
+        {
+            "fieldName": "num3",
+            "fieldType": "BigDecimal"
+        },
+        {
+            "fieldName": "num4",
+            "fieldType": "BigDecimal"
+        },
+        {
+            "fieldName": "num5",
+            "fieldType": "BigDecimal"
+        },
+        {
+            "fieldName": "num6",
+            "fieldType": "BigDecimal"
+        },
+        {
+            "fieldName": "num7",
+            "fieldType": "BigDecimal"
+        },
+        {
+            "fieldName": "num8",
+            "fieldType": "BigDecimal"
+        },
+        {
+            "fieldName": "num9",
+            "fieldType": "BigDecimal"
+        },
+        {
+            "fieldName": "num10",
+            "fieldType": "BigDecimal"
+        },
+        {
+            "fieldName": "num11",
+            "fieldType": "BigDecimal"
+        },
+        {
+            "fieldName": "num12",
+            "fieldType": "BigDecimal"
+        },
+        {
+            "fieldName": "num13",
+            "fieldType": "BigDecimal"
+        },
+        {
+            "fieldName": "num14",
+            "fieldType": "BigDecimal"
+        },
+        {
+            "fieldName": "num15",
+            "fieldType": "BigDecimal"
+        },
+        {
+            "fieldName": "num16",
+            "fieldType": "BigDecimal"
+        },
+        {
+            "fieldName": "num17",
+            "fieldType": "BigDecimal"
+        },
+        {
+            "fieldName": "num18",
+            "fieldType": "BigDecimal"
+        },
+        {
+            "fieldName": "num19",
+            "fieldType": "BigDecimal"
+        },
+        {
+            "fieldName": "num20",
+            "fieldType": "BigDecimal"
+        },
+        {
+            "fieldName": "date1",
+            "fieldType": "Instant"
+        },
+        {
+            "fieldName": "date2",
+            "fieldType": "Instant"
+        },
+        {
+            "fieldName": "date3",
+            "fieldType": "Instant"
+        },
+        {
+            "fieldName": "date4",
+            "fieldType": "Instant"
+        },
+        {
+            "fieldName": "date5",
+            "fieldType": "Instant"
+        },
+        {
+            "fieldName": "date6",
+            "fieldType": "Instant"
+        },
+        {
+            "fieldName": "date7",
+            "fieldType": "Instant"
+        },
+        {
+            "fieldName": "date8",
+            "fieldType": "Instant"
+        },
+        {
+            "fieldName": "date9",
+            "fieldType": "Instant"
+        },
+        {
+            "fieldName": "date10",
+            "fieldType": "Instant"
+        },
+        {
+            "fieldName": "bool1",
+            "fieldType": "Instant"
+        },
+        {
+            "fieldName": "bool2",
+            "fieldType": "Instant"
+        },
+        {
+            "fieldName": "bool3",
+            "fieldType": "Instant"
+        },
+        {
+            "fieldName": "bool4",
+            "fieldType": "Instant"
+        },
+        {
+            "fieldName": "bool5",
+            "fieldType": "Instant"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "checkScript",
+            "otherEntityRelationshipName": "content",
+            "relationshipValidateRules": "required",
+            "relationshipName": "checkScript",
+            "otherEntityField": "scriptName"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "flow",
+            "otherEntityRelationshipName": "content",
+            "relationshipValidateRules": "required",
+            "relationshipName": "flow",
+            "otherEntityField": "flowName"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "task",
+            "otherEntityRelationshipName": "content",
+            "relationshipValidateRules": "required",
+            "relationshipName": "task",
+            "otherEntityField": "taskName"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "taskExecution",
+            "otherEntityRelationshipName": "content",
+            "relationshipValidateRules": "required",
+            "relationshipName": "taskExecution",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "flowExecution",
+            "otherEntityRelationshipName": "content",
+            "relationshipValidateRules": "required",
+            "relationshipName": "flowExecution",
+            "otherEntityField": "id"
+        }
+    ],
+    "changelogDate": "20191031122726",
+    "entityTableName": "content",
+    "dto": "no",
+    "pagination": "pagination",
+    "service": "serviceClass",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": [
+        "zeemon"
+    ],
+    "microserviceName": "zeemonManager"
+}

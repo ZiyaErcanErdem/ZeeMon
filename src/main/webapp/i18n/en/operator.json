@@ -1,0 +1,28 @@
+{
+    "dynamic": {
+        "Operator" : {
+            "null": "",
+            "UNKNOWN": "---",
+            "EQ": "Equals",
+            "LIKE": "Like",
+            "SW": "Starts With",
+            "EW": "Ends With",
+            "BETWEEN": "Between",
+            "GT": "Greater Than",
+            "LT": "Less Than",
+            "GTE": "Greater or Equals",
+            "LTE": "Less or Equals",
+            "IN": "In",
+
+            "NOT_EQ": "Not Equals",
+            "NOT_LIKE": "Not  Like",
+            "NOT_SW": "Not Starts With",
+            "NOT_EW": "Not Ends With",
+            "NOT_IN": "Not In",
+
+            "IS_NULL": "Is Null",
+            "IS_NOT_NULL": "Is Not Null"
+
+        }
+    }
+}

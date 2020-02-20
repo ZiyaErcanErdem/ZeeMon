@@ -1,0 +1,52 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="actionScript">
+            <h2><span jhiTranslate="zeemonApp.actionScript.detail.title">Action Script</span> {{ actionScript.id }}</h2>
+
+            <hr>
+
+            <jhi-alert-error></jhi-alert-error>
+
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="zeemonApp.actionScript.actionCode">Action Code</span></dt>
+                <dd>
+                    <span>{{ actionScript.actionCode }}</span>
+                </dd>
+                <dt><span jhiTranslate="zeemonApp.actionScript.scriptName">Script Name</span></dt>
+                <dd>
+                    <span>{{ actionScript.scriptName }}</span>
+                </dd>
+                <dt><span jhiTranslate="zeemonApp.actionScript.scriptType">Script Type</span></dt>
+                <dd>
+                    <span jhiTranslate="{{ 'zeemonApp.ScriptType.' + actionScript.scriptType }}">{{ actionScript.scriptType }}</span>
+                </dd>
+                <dt><span jhiTranslate="zeemonApp.actionScript.actionType">Action Type</span></dt>
+                <dd>
+                    <span jhiTranslate="{{ 'zeemonApp.ActionType.' + actionScript.actionType }}">{{ actionScript.actionType }}</span>
+                </dd>
+                <dt><span jhiTranslate="zeemonApp.actionScript.actionSource">Action Source</span></dt>
+                <dd>
+                    <span>{{ actionScript.actionSource }}</span>
+                </dd>
+                <dt><span jhiTranslate="zeemonApp.actionScript.endpoint">Endpoint</span></dt>
+                <dd>
+                    <div *ngIf="actionScript.endpoint">
+                        <a [routerLink]="['/endpoint', actionScript.endpoint?.id, 'view']">{{ actionScript.endpoint?.endpointName }}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/action-script', actionScript.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

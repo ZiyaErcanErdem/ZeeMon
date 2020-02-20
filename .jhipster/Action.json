@@ -1,0 +1,75 @@
+{
+    "name": "Action",
+    "fields": [
+        {
+            "fieldName": "actionName",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required",
+                "maxlength"
+            ],
+            "fieldValidateRulesMaxlength": 255
+        },
+        {
+            "fieldName": "actionDescription",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "maxlength"
+            ],
+            "fieldValidateRulesMaxlength": 512
+        },
+        {
+            "fieldName": "nextExecutionStartTime",
+            "fieldType": "Instant"
+        },
+        {
+            "fieldName": "actionState",
+            "fieldType": "ActionState",
+            "fieldValues": "PENDING,PAUSED,PROCESSING,COMPLETED,RESOLVED"
+        },
+        {
+            "fieldName": "resolutionRuleExpression",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "maxlength"
+            ],
+            "fieldValidateRulesMaxlength": 2048
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "actionExecution",
+            "otherEntityRelationshipName": "action",
+            "relationshipName": "actionExecution"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "agent",
+            "otherEntityRelationshipName": "action",
+            "relationshipValidateRules": "required",
+            "relationshipName": "agent",
+            "otherEntityField": "agentName"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "actionScript",
+            "otherEntityRelationshipName": "action",
+            "relationshipValidateRules": "required",
+            "relationshipName": "actionScript",
+            "otherEntityField": "actionName"
+        }
+    ],
+    "changelogDate": "20191031122721",
+    "entityTableName": "action",
+    "dto": "no",
+    "pagination": "pagination",
+    "service": "serviceClass",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": [
+        "zeemon"
+    ],
+    "microserviceName": "zeemonManager"
+}

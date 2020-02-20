@@ -1,0 +1,139 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+            <h2 id="jhi-flow-execution-heading" jhiTranslate="zeemonApp.flowExecution.home.createOrEditLabel">Create or edit a Flow Execution</h2>
+
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+
+                <div class="form-group" [hidden]="!editForm.get('id')!.value">
+                    <label for="id" jhiTranslate="global.field.id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id" formControlName="id" readonly />
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="zeemonApp.flowExecution.executionStartTime" for="field_executionStartTime">Execution Start Time</label>
+                    <div class="d-flex">
+                        <input id="field_executionStartTime" type="datetime-local" class="form-control" name="executionStartTime" formControlName="executionStartTime" placeholder="YYYY-MM-DD HH:mm"/>
+                    </div>
+                    <div *ngIf="editForm.get('executionStartTime')!.invalid && (editForm.get('executionStartTime')!.dirty || editForm.get('executionStartTime')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('executionStartTime')?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                            [hidden]="!editForm.get('executionStartTime')?.errors?.ZonedDateTimelocal" jhiTranslate="entity.validation.ZonedDateTimelocal">
+                            This field should be a date and time.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="zeemonApp.flowExecution.executionEndTime" for="field_executionEndTime">Execution End Time</label>
+                    <div class="d-flex">
+                        <input id="field_executionEndTime" type="datetime-local" class="form-control" name="executionEndTime" formControlName="executionEndTime" placeholder="YYYY-MM-DD HH:mm"/>
+                    </div>
+                    <div *ngIf="editForm.get('executionEndTime')!.invalid && (editForm.get('executionEndTime')!.dirty || editForm.get('executionEndTime')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('executionEndTime')?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                            [hidden]="!editForm.get('executionEndTime')?.errors?.ZonedDateTimelocal" jhiTranslate="entity.validation.ZonedDateTimelocal">
+                            This field should be a date and time.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="zeemonApp.flowExecution.totalTaskCount" for="field_totalTaskCount">Total Task Count</label>
+                    <input type="number" class="form-control" name="totalTaskCount" id="field_totalTaskCount"
+                           formControlName="totalTaskCount"/>
+                    <div *ngIf="editForm.get('totalTaskCount')!.invalid && (editForm.get('totalTaskCount')!.dirty || editForm.get('totalTaskCount')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('totalTaskCount')?.errors?.min" jhiTranslate="entity.validation.min" [translateValues]="{ min: 0 }">
+                            This field should be at least 0.
+                        </small>
+                        <small class="form-text text-danger"
+                            [hidden]="!editForm.get('totalTaskCount')?.errors?.number" jhiTranslate="entity.validation.number">
+                            This field should be a number.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="zeemonApp.flowExecution.runningTaskCount" for="field_runningTaskCount">Running Task Count</label>
+                    <input type="number" class="form-control" name="runningTaskCount" id="field_runningTaskCount"
+                           formControlName="runningTaskCount"/>
+                    <div *ngIf="editForm.get('runningTaskCount')!.invalid && (editForm.get('runningTaskCount')!.dirty || editForm.get('runningTaskCount')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('runningTaskCount')?.errors?.min" jhiTranslate="entity.validation.min" [translateValues]="{ min: 0 }">
+                            This field should be at least 0.
+                        </small>
+                        <small class="form-text text-danger"
+                            [hidden]="!editForm.get('runningTaskCount')?.errors?.number" jhiTranslate="entity.validation.number">
+                            This field should be a number.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="zeemonApp.flowExecution.errorTaskCount" for="field_errorTaskCount">Error Task Count</label>
+                    <input type="number" class="form-control" name="errorTaskCount" id="field_errorTaskCount"
+                           formControlName="errorTaskCount"/>
+                    <div *ngIf="editForm.get('errorTaskCount')!.invalid && (editForm.get('errorTaskCount')!.dirty || editForm.get('errorTaskCount')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('errorTaskCount')?.errors?.min" jhiTranslate="entity.validation.min" [translateValues]="{ min: 0 }">
+                            This field should be at least 0.
+                        </small>
+                        <small class="form-text text-danger"
+                            [hidden]="!editForm.get('errorTaskCount')?.errors?.number" jhiTranslate="entity.validation.number">
+                            This field should be a number.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="zeemonApp.flowExecution.executionStatus" for="field_executionStatus">Execution Status</label>
+                    <select class="form-control" name="executionStatus" formControlName="executionStatus" id="field_executionStatus">
+                        <option value="PENDING">{{ 'zeemonApp.ExecutionStatus.PENDING' | translate }}</option>
+                        <option value="EXECUTING">{{ 'zeemonApp.ExecutionStatus.EXECUTING' | translate }}</option>
+                        <option value="CANCELLED">{{ 'zeemonApp.ExecutionStatus.CANCELLED' | translate }}</option>
+                        <option value="SUCCESS">{{ 'zeemonApp.ExecutionStatus.SUCCESS' | translate }}</option>
+                        <option value="FAILED">{{ 'zeemonApp.ExecutionStatus.FAILED' | translate }}</option>
+                    </select>
+                    <div *ngIf="editForm.get('executionStatus')!.invalid && (editForm.get('executionStatus')!.dirty || editForm.get('executionStatus')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('executionStatus')?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="zeemonApp.flowExecution.flow" for="field_flow">Flow</label>
+                    <select class="form-control" id="field_flow" name="flow" formControlName="flow">
+                        <option *ngIf="!editForm.get('flow')!.value" [ngValue]="null" selected></option>
+                        <option [ngValue]="flowOption.id === editForm.get('flow')!.value?.id ? editForm.get('flow')!.value : flowOption" *ngFor="let flowOption of flows; trackBy: trackById">{{ flowOption.flowName }}</option>
+                    </select>
+                </div>
+                <div *ngIf="editForm.get('flow')!.invalid && (editForm.get('flow')!.dirty || editForm.get('flow')!.touched)">
+                    <small class="form-text text-danger"
+                           *ngIf="editForm.get('flow')?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                    </small>
+                </div>
+            </div>
+
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
+                    <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+                </button>
+
+                <button type="submit" id="save-entity" [disabled]="editForm.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

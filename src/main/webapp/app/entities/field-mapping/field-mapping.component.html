@@ -1,0 +1,97 @@
+<div>
+    <h2 id="page-heading">
+        <span jhiTranslate="zeemonApp.fieldMapping.home.title">Field Mappings</span>
+
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-field-mapping" [routerLink]="['/field-mapping/new']">
+            <fa-icon icon="plus"></fa-icon>
+            <span  jhiTranslate="zeemonApp.fieldMapping.home.createLabel">
+            Create a new Field Mapping
+            </span>
+        </button>
+    </h2>
+
+    <jhi-alert-error></jhi-alert-error>
+
+    <jhi-alert></jhi-alert>
+
+    <div class="alert alert-warning" id="no-result" *ngIf="fieldMappings?.length === 0">
+        <span jhiTranslate="zeemonApp.fieldMapping.home.notFound">No fieldMappings found</span>
+    </div>
+
+    <div class="table-responsive" id="entities" *ngIf="fieldMappings?.length > 0">
+        <table class="table table-striped" aria-describedby="page-heading">
+            <thead>
+                <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" [callback]="loadPage.bind(this)">
+                    <th scope="col"  jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="sourceIndex"><span jhiTranslate="zeemonApp.fieldMapping.sourceIndex">Source Index</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="sourceName"><span jhiTranslate="zeemonApp.fieldMapping.sourceName">Source Name</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="sourceFormat"><span jhiTranslate="zeemonApp.fieldMapping.sourceFormat">Source Format</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="sourceStartIndex"><span jhiTranslate="zeemonApp.fieldMapping.sourceStartIndex">Source Start Index</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="sourceEndIndex"><span jhiTranslate="zeemonApp.fieldMapping.sourceEndIndex">Source End Index</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="sourceDataType"><span jhiTranslate="zeemonApp.fieldMapping.sourceDataType">Source Data Type</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="targetName"><span jhiTranslate="zeemonApp.fieldMapping.targetName">Target Name</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="targetColName"><span jhiTranslate="zeemonApp.fieldMapping.targetColName">Target Col Name</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="targetDataType"><span jhiTranslate="zeemonApp.fieldMapping.targetDataType">Target Data Type</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="transformation"><span jhiTranslate="zeemonApp.fieldMapping.transformation">Transformation</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="requiredData"><span jhiTranslate="zeemonApp.fieldMapping.requiredData">Required Data</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="contentMapper.mapperName"><span jhiTranslate="zeemonApp.fieldMapping.contentMapper">Content Mapper</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let fieldMapping of fieldMappings ;trackBy: trackId">
+                    <td><a [routerLink]="['/field-mapping', fieldMapping.id, 'view']">{{ fieldMapping.id }}</a></td>
+                    <td>{{ fieldMapping.sourceIndex }}</td>
+                    <td>{{ fieldMapping.sourceName }}</td>
+                    <td>{{ fieldMapping.sourceFormat }}</td>
+                    <td>{{ fieldMapping.sourceStartIndex }}</td>
+                    <td>{{ fieldMapping.sourceEndIndex }}</td>
+                    <td jhiTranslate="{{ 'zeemonApp.DataType.' + fieldMapping.sourceDataType }}">{{ fieldMapping.sourceDataType }}</td>
+                    <td>{{ fieldMapping.targetName }}</td>
+                    <td>{{ fieldMapping.targetColName }}</td>
+                    <td jhiTranslate="{{ 'zeemonApp.DataType.' + fieldMapping.targetDataType }}">{{ fieldMapping.targetDataType }}</td>
+                    <td>{{ fieldMapping.transformation }}</td>
+                    <td>{{ fieldMapping.requiredData }}</td>
+                    <td>
+                        <div *ngIf="fieldMapping.contentMapper">
+                            <a [routerLink]="['/content-mapper', fieldMapping.contentMapper?.id, 'view']" >{{ fieldMapping.contentMapper?.mapperName }}</a>
+                        </div>
+                    </td>
+                    <td class="text-right">
+                        <div class="btn-group">
+                            <button type="submit"
+                                    [routerLink]="['/field-mapping', fieldMapping.id, 'view']"
+                                    class="btn btn-info btn-sm">
+                                <fa-icon icon="eye"></fa-icon>
+                                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                            </button>
+
+                            <button type="submit"
+                                    [routerLink]="['/field-mapping', fieldMapping.id, 'edit']"
+                                    class="btn btn-primary btn-sm">
+                                <fa-icon icon="pencil-alt"></fa-icon>
+                                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                            </button>
+
+                            <button type="submit" (click)="delete(fieldMapping)"
+                                    class="btn btn-danger btn-sm">
+                                <fa-icon icon="times"></fa-icon>
+                                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div *ngIf="fieldMappings?.length > 0">
+        <div class="row justify-content-center">
+            <jhi-item-count [page]="page" [total]="totalItems" [itemsPerPage]="itemsPerPage"></jhi-item-count>
+        </div>
+
+        <div class="row justify-content-center">
+            <ngb-pagination [collectionSize]="totalItems" [(page)]="ngbPaginationPage" [pageSize]="itemsPerPage" [maxSize]="5" [rotate]="true" [boundaryLinks]="true" (pageChange)="loadPage($event)"></ngb-pagination>
+        </div>
+    </div>
+</div>

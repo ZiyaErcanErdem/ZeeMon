@@ -1,0 +1,390 @@
+
+STR_MAX_LEN = 255
+TXT_MAX_LEN = 2048
+NUM_MIN_VAL = 0
+NUM_MAX_VAL = 99999999999999
+
+application {
+  config {
+    baseName zeemon
+    packageName org.zee.app.zeemon
+    applicationType monolith
+    serverPort 8590
+    serviceDiscoveryType no
+    authenticationType jwt
+    websocket spring-websocket
+    
+    buildTool maven
+    cacheProvider ehcache
+    clientFramework angularX
+    clientPackageManager npm
+    databaseType sql
+    devDatabaseType mysql
+    prodDatabaseType mysql
+    enableHibernateCache true
+    enableSwaggerCodegen false
+    skipUserManagement false
+    
+    enableTranslation true
+    nativeLanguage tr
+    languages [tr, en]   
+    useSass true
+  }
+  entities * 
+}
+
+enum PropKeyType {
+        ANY,
+        SCHEMA,
+        HOST,
+        PORT,
+        URI,
+        BASEPATH,
+        UID,
+        PASSWORD,
+        CLIENT_ID,
+        CLIENT_SECRET,
+        CLIENT_AUDIENCE,
+        CLIENT_SCOPE,
+        KEYSTORE_TYPE,
+        KEYSTORE_PATH,
+        KEYSTORE_ALIAS,
+        KEYSTORE_PASSWORD
+}
+
+enum EndpointType {
+        DATABASE,
+        FILE_SYSTEM,
+        FTP,
+        SFTP,
+        SSH,
+        REST,
+        WEBSERVICE,
+        AGENT
+}
+
+enum EndpointSpec {
+        ANY,
+        MSSQL,
+        MYSQL,
+        POSTGRESQL,
+        ORACLE,
+        MONGODB
+}
+
+enum ActionType {
+	EMAIL,
+	SMS,
+    SCRIPT
+}
+
+enum ScriptType {
+	SQL_SCRIPT,
+	SHELL_SCRIPT
+}
+
+enum AgentType {
+	SQL_AGENT,
+	SHELL_AGENT,
+    SQL_AND_SHELL_AGENT
+}
+
+enum DataType {
+	STRING,
+	NUMBER,
+	DATE,
+    BOOLEAN
+}
+
+enum ItemFormat {
+  	SQL_RESULTSET,
+  	JSON,
+  	XML,
+  	DELIMITED_TEXT,
+  	FIXED_LENGTH_TEXT,
+    ANY
+}
+
+enum TriggerType {
+	MANUAL,
+	PERIODIC,
+	CRON,
+	EVENT
+}
+
+enum TimeUnit {
+	SECOND,
+	MINUTE,
+	HOUR,
+	DAY
+}
+
+enum ActionState {	
+    PENDING,
+    PAUSED,
+    PROCESSING,
+    COMPLETED,
+    RESOLVED
+}
+
+enum TaskState {	
+    PENDING,
+    PAUSED,
+    PROCESSING
+}
+
+enum FlowState {	
+    PENDING,
+    PAUSED,
+    PROCESSING
+}
+
+enum ExecutionStatus {
+	PENDING,
+	EXECUTING,
+    CANCELLED,
+	SUCCESS,
+	FAILED
+}
+
+enum AgentStatus {
+	ACTIVE,
+    PASSIVE,
+	DISCONNECTED
+}
+
+entity Agent {
+    agentName String required maxlength(100),
+    agentInstanceId String maxlength(100),
+    listenURI String maxlength(512),
+    agentType AgentType required,
+    agentStatus AgentStatus required,
+    agentDescription String maxlength(512)
+}
+
+entity EndpointProperty {
+    propKey String required maxlength(100),
+    propKeyType PropKeyType required,
+    propValue String required maxlength(512),
+    propValueType DataType required,
+    propDescription String maxlength(512)
+}
+
+entity Endpoint {
+    endpointName String required maxlength(100),
+    endpointInstanceId String maxlength(100),
+    endpointType EndpointType required,
+    endpointSpec EndpointSpec required,
+    endpointDescription String maxlength(512)
+}
+
+relationship OneToMany {
+	Endpoint to EndpointProperty{endpoint(endpointName) required},
+    Endpoint to CheckScript{endpoint(endpointName) required},    
+    Endpoint to ActionScript{endpoint(endpointName) required},
+    
+    Agent to Task{agent(agentName) required}
+    Agent to Action{agent(agentName) required}
+    
+    ActionScript to ActionParam{actionScript(scriptName) required},
+    ActionScript to Action{actionScript(actionName) required},
+    
+    CheckScript to ScriptParam{checkScript(scriptName) required},
+    CheckScript to Task{checkScript(scriptName) required},
+    CheckScript to Content{checkScript(scriptName) required},
+    
+    ContentMapper to CheckScript{contentMapper(mapperName) required},
+    ContentMapper to FieldMapping{contentMapper(mapperName) required},
+    
+    Flow to FlowExecution{flow(flowName) required},
+    Flow to Task{flow(flowName)},
+    Flow to Content{flow(flowName) required},
+
+    Task to TaskExecution{task(taskName) required},
+    Task to Content{task(taskName) required},
+    Task to ContentValidationError{task(taskName) required},
+    
+    Action to ActionExecution{action(actionName) required},
+    
+    TaskExecution to Content{taskExecution required},
+    TaskExecution to ContentValidationError{taskExecution required},
+    
+    FlowExecution to TaskExecution{flowExecution required},
+    FlowExecution to Content{flowExecution required},
+
+    EventTrigger to Flow{eventTrigger(triggerName)},
+
+}
+
+entity FlowExecution {
+	executionStartTime Instant required,
+    executionEndTime Instant,
+    totalTaskCount Integer min(0),
+    runningTaskCount Integer min(0),
+    errorTaskCount Integer min(0),
+    executionStatus ExecutionStatus required
+}
+
+entity TaskExecution {
+	executionStartTime Instant required,
+    executionEndTime Instant,
+    executionStatus ExecutionStatus required
+}
+
+entity ActionExecution {
+	executionStartTime Instant required,
+    executionEndTime Instant,
+    executionStatus ExecutionStatus required
+	actionLog String maxlength(TXT_MAX_LEN),
+}
+
+entity ActionParam {
+	paramName String required maxlength(STR_MAX_LEN),
+	paramDataType DataType required,
+    paramValue String maxlength(STR_MAX_LEN),
+    paramExpression String maxlength(STR_MAX_LEN),
+}
+
+entity ActionScript {
+	actionCode String required maxlength(20),
+	scriptName String required maxlength(STR_MAX_LEN),
+    scriptType ScriptType required,
+    actionType ActionType required,
+	actionSource String maxlength(TXT_MAX_LEN),
+}
+
+entity EventTrigger {
+	triggerName String required maxlength(100),
+	triggerType TriggerType required,
+    triggerPeriod Long, // Akış tetikleyicisinin periyodu.
+    triggerTimeUnit TimeUnit,
+    triggerCronExpression String maxlength(STR_MAX_LEN),
+    triggerCronTimeZone String maxlength(STR_MAX_LEN)
+}
+
+entity Flow {
+	flowName String required maxlength(STR_MAX_LEN),
+	flowDescription String maxlength(512),
+    nextExecutionStartTime Instant,
+    flowState FlowState required
+}
+
+entity Task {
+	taskName String required maxlength(STR_MAX_LEN),
+	taskDescription String maxlength(512),
+    nextExecutionStartTime Instant,
+    taskState TaskState required
+}
+
+entity Action {
+	actionName String required maxlength(STR_MAX_LEN),
+	actionDescription String maxlength(512),
+    nextExecutionStartTime Instant,
+    actionState ActionState,
+    resolutionRuleExpression String maxlength(TXT_MAX_LEN)
+}
+
+entity ScriptParam {
+	paramName String required maxlength(STR_MAX_LEN),
+	paramDataType DataType required,
+    paramValue String maxlength(STR_MAX_LEN),
+    paramExpression String maxlength(STR_MAX_LEN),
+}
+
+entity CheckScript {
+	scriptName String required maxlength(STR_MAX_LEN),
+    scriptType ScriptType required,
+	scriptSource String maxlength(TXT_MAX_LEN),
+    actionRuleExpression String maxlength(TXT_MAX_LEN)
+}
+
+entity ContentMapper {
+	mapperName String required maxlength(STR_MAX_LEN),
+    itemFormat ItemFormat required,
+    containsHeader Boolean,
+    fieldDelimiter String required maxlength(50)
+}
+
+entity FieldMapping {
+	sourceIndex Integer min(0),
+    sourceName String maxlength(STR_MAX_LEN),
+    sourceFormat String minlength(0) maxlength(STR_MAX_LEN),
+    sourceStartIndex Integer min(0),
+    sourceEndIndex Integer min(0),
+    sourceDataType DataType required,
+    targetName String required maxlength(STR_MAX_LEN),
+    targetColName String required maxlength(STR_MAX_LEN),
+    targetDataType DataType required,
+    transformation String maxlength(TXT_MAX_LEN),
+    requiredData Boolean
+}
+
+entity Content {
+	sourceIndex Integer required min(0)
+	txt1 String maxlength(STR_MAX_LEN),
+	txt2 String maxlength(STR_MAX_LEN),
+	txt3 String maxlength(STR_MAX_LEN),
+	txt4 String maxlength(STR_MAX_LEN),
+	txt5 String maxlength(STR_MAX_LEN),
+	txt6 String maxlength(STR_MAX_LEN),
+	txt7 String maxlength(STR_MAX_LEN),
+	txt8 String maxlength(STR_MAX_LEN),
+	txt9 String maxlength(STR_MAX_LEN),
+	txt10 String maxlength(STR_MAX_LEN),
+	txt11 String maxlength(STR_MAX_LEN),
+	txt12 String maxlength(STR_MAX_LEN),
+	txt13 String maxlength(STR_MAX_LEN),
+	txt14 String maxlength(STR_MAX_LEN),
+	txt15 String maxlength(STR_MAX_LEN),
+	txt16 String maxlength(STR_MAX_LEN),
+	txt17 String maxlength(STR_MAX_LEN),
+	txt18 String maxlength(STR_MAX_LEN),
+	txt19 String maxlength(STR_MAX_LEN),
+	txt20 String maxlength(STR_MAX_LEN), 
+	num1 BigDecimal,
+	num2 BigDecimal,
+	num3 BigDecimal,
+	num4 BigDecimal,
+	num5 BigDecimal,
+	num6 BigDecimal,
+	num7 BigDecimal,
+	num8 BigDecimal,
+	num9 BigDecimal,
+	num10 BigDecimal,  
+	num11 BigDecimal,
+	num12 BigDecimal,
+	num13 BigDecimal,
+	num14 BigDecimal,
+	num15 BigDecimal,
+	num16 BigDecimal,
+	num17 BigDecimal,
+	num18 BigDecimal,
+	num19 BigDecimal,
+	num20 BigDecimal,     
+	date1 Instant,
+    date2 Instant,
+    date3 Instant,
+    date4 Instant,
+    date5 Instant,
+    date6 Instant,
+    date7 Instant,
+    date8 Instant,
+    date9 Instant,
+    date10 Instant,
+    bool1 Boolean,
+    bool2 Boolean,
+    bool3 Boolean,
+    bool4 Boolean,
+    bool5 Boolean,
+}
+
+entity ContentValidationError {
+	sourceIndex Integer required min(0),
+    sourceText String maxlength(TXT_MAX_LEN),
+	errorText String maxlength(TXT_MAX_LEN)
+}
+
+
+paginate * with pagination
+service * with serviceClass
+// microservice all with zeemon

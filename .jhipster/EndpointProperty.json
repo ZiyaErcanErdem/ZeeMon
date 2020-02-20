@@ -1,0 +1,69 @@
+{
+    "name": "EndpointProperty",
+    "fields": [
+        {
+            "fieldName": "propKey",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required",
+                "maxlength"
+            ],
+            "fieldValidateRulesMaxlength": 100
+        },
+        {
+            "fieldName": "propKeyType",
+            "fieldType": "PropKeyType",
+            "fieldValues": "ANY,SCHEMA,HOST,PORT,URI,BASEPATH,UID,PASSWORD,CLIENT_ID,CLIENT_SECRET,CLIENT_AUDIENCE,CLIENT_SCOPE,KEYSTORE_TYPE,KEYSTORE_PATH,KEYSTORE_ALIAS,KEYSTORE_PASSWORD",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "propValue",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required",
+                "maxlength"
+            ],
+            "fieldValidateRulesMaxlength": 512
+        },
+        {
+            "fieldName": "propValueType",
+            "fieldType": "DataType",
+            "fieldValues": "STRING,NUMBER,DATE,BOOLEAN",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "propDescription",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "maxlength"
+            ],
+            "fieldValidateRulesMaxlength": 512
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "endpoint",
+            "otherEntityRelationshipName": "endpointProperty",
+            "relationshipValidateRules": "required",
+            "relationshipName": "endpoint",
+            "otherEntityField": "endpointName"
+        }
+    ],
+    "changelogDate": "20191031122711",
+    "entityTableName": "endpoint_property",
+    "dto": "no",
+    "pagination": "pagination",
+    "service": "serviceClass",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": [
+        "zeemon"
+    ],
+    "microserviceName": "zeemonManager"
+}

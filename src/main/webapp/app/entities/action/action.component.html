@@ -1,0 +1,91 @@
+<div>
+    <h2 id="page-heading">
+        <span jhiTranslate="zeemonApp.action.home.title">Actions</span>
+
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-action" [routerLink]="['/action/new']">
+            <fa-icon icon="plus"></fa-icon>
+            <span  jhiTranslate="zeemonApp.action.home.createLabel">
+            Create a new Action
+            </span>
+        </button>
+    </h2>
+
+    <jhi-alert-error></jhi-alert-error>
+
+    <jhi-alert></jhi-alert>
+
+    <div class="alert alert-warning" id="no-result" *ngIf="actions?.length === 0">
+        <span jhiTranslate="zeemonApp.action.home.notFound">No actions found</span>
+    </div>
+
+    <div class="table-responsive" id="entities" *ngIf="actions?.length > 0">
+        <table class="table table-striped" aria-describedby="page-heading">
+            <thead>
+                <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" [callback]="loadPage.bind(this)">
+                    <th scope="col"  jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="actionName"><span jhiTranslate="zeemonApp.action.actionName">Action Name</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="actionDescription"><span jhiTranslate="zeemonApp.action.actionDescription">Action Description</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="nextExecutionStartTime"><span jhiTranslate="zeemonApp.action.nextExecutionStartTime">Next Execution Start Time</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="actionState"><span jhiTranslate="zeemonApp.action.actionState">Action State</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="resolutionRuleExpression"><span jhiTranslate="zeemonApp.action.resolutionRuleExpression">Resolution Rule Expression</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="agent.agentName"><span jhiTranslate="zeemonApp.action.agent">Agent</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="actionScript.actionName"><span jhiTranslate="zeemonApp.action.actionScript">Action Script</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let action of actions ;trackBy: trackId">
+                    <td><a [routerLink]="['/action', action.id, 'view']">{{ action.id }}</a></td>
+                    <td>{{ action.actionName }}</td>
+                    <td>{{ action.actionDescription }}</td>
+                    <td>{{ action.nextExecutionStartTime | date:'medium' }}</td>
+                    <td jhiTranslate="{{ 'zeemonApp.ActionState.' + action.actionState }}">{{ action.actionState }}</td>
+                    <td>{{ action.resolutionRuleExpression }}</td>
+                    <td>
+                        <div *ngIf="action.agent">
+                            <a [routerLink]="['/agent', action.agent?.id, 'view']" >{{ action.agent?.agentName }}</a>
+                        </div>
+                    </td>
+                    <td>
+                        <div *ngIf="action.actionScript">
+                            <a [routerLink]="['/action-script', action.actionScript?.id, 'view']" >{{ action.actionScript?.actionName }}</a>
+                        </div>
+                    </td>
+                    <td class="text-right">
+                        <div class="btn-group">
+                            <button type="submit"
+                                    [routerLink]="['/action', action.id, 'view']"
+                                    class="btn btn-info btn-sm">
+                                <fa-icon icon="eye"></fa-icon>
+                                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                            </button>
+
+                            <button type="submit"
+                                    [routerLink]="['/action', action.id, 'edit']"
+                                    class="btn btn-primary btn-sm">
+                                <fa-icon icon="pencil-alt"></fa-icon>
+                                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                            </button>
+
+                            <button type="submit" (click)="delete(action)"
+                                    class="btn btn-danger btn-sm">
+                                <fa-icon icon="times"></fa-icon>
+                                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div *ngIf="actions?.length > 0">
+        <div class="row justify-content-center">
+            <jhi-item-count [page]="page" [total]="totalItems" [itemsPerPage]="itemsPerPage"></jhi-item-count>
+        </div>
+
+        <div class="row justify-content-center">
+            <ngb-pagination [collectionSize]="totalItems" [(page)]="ngbPaginationPage" [pageSize]="itemsPerPage" [maxSize]="5" [rotate]="true" [boundaryLinks]="true" (pageChange)="loadPage($event)"></ngb-pagination>
+        </div>
+    </div>
+</div>

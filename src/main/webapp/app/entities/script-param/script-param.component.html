@@ -1,0 +1,83 @@
+<div>
+    <h2 id="page-heading">
+        <span jhiTranslate="zeemonApp.scriptParam.home.title">Script Params</span>
+
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-script-param" [routerLink]="['/script-param/new']">
+            <fa-icon icon="plus"></fa-icon>
+            <span  jhiTranslate="zeemonApp.scriptParam.home.createLabel">
+            Create a new Script Param
+            </span>
+        </button>
+    </h2>
+
+    <jhi-alert-error></jhi-alert-error>
+
+    <jhi-alert></jhi-alert>
+
+    <div class="alert alert-warning" id="no-result" *ngIf="scriptParams?.length === 0">
+        <span jhiTranslate="zeemonApp.scriptParam.home.notFound">No scriptParams found</span>
+    </div>
+
+    <div class="table-responsive" id="entities" *ngIf="scriptParams?.length > 0">
+        <table class="table table-striped" aria-describedby="page-heading">
+            <thead>
+                <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" [callback]="loadPage.bind(this)">
+                    <th scope="col"  jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="paramName"><span jhiTranslate="zeemonApp.scriptParam.paramName">Param Name</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="paramDataType"><span jhiTranslate="zeemonApp.scriptParam.paramDataType">Param Data Type</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="paramValue"><span jhiTranslate="zeemonApp.scriptParam.paramValue">Param Value</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="paramExpression"><span jhiTranslate="zeemonApp.scriptParam.paramExpression">Param Expression</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="checkScript.scriptName"><span jhiTranslate="zeemonApp.scriptParam.checkScript">Check Script</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let scriptParam of scriptParams ;trackBy: trackId">
+                    <td><a [routerLink]="['/script-param', scriptParam.id, 'view']">{{ scriptParam.id }}</a></td>
+                    <td>{{ scriptParam.paramName }}</td>
+                    <td jhiTranslate="{{ 'zeemonApp.DataType.' + scriptParam.paramDataType }}">{{ scriptParam.paramDataType }}</td>
+                    <td>{{ scriptParam.paramValue }}</td>
+                    <td>{{ scriptParam.paramExpression }}</td>
+                    <td>
+                        <div *ngIf="scriptParam.checkScript">
+                            <a [routerLink]="['/check-script', scriptParam.checkScript?.id, 'view']" >{{ scriptParam.checkScript?.scriptName }}</a>
+                        </div>
+                    </td>
+                    <td class="text-right">
+                        <div class="btn-group">
+                            <button type="submit"
+                                    [routerLink]="['/script-param', scriptParam.id, 'view']"
+                                    class="btn btn-info btn-sm">
+                                <fa-icon icon="eye"></fa-icon>
+                                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                            </button>
+
+                            <button type="submit"
+                                    [routerLink]="['/script-param', scriptParam.id, 'edit']"
+                                    class="btn btn-primary btn-sm">
+                                <fa-icon icon="pencil-alt"></fa-icon>
+                                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                            </button>
+
+                            <button type="submit" (click)="delete(scriptParam)"
+                                    class="btn btn-danger btn-sm">
+                                <fa-icon icon="times"></fa-icon>
+                                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div *ngIf="scriptParams?.length > 0">
+        <div class="row justify-content-center">
+            <jhi-item-count [page]="page" [total]="totalItems" [itemsPerPage]="itemsPerPage"></jhi-item-count>
+        </div>
+
+        <div class="row justify-content-center">
+            <ngb-pagination [collectionSize]="totalItems" [(page)]="ngbPaginationPage" [pageSize]="itemsPerPage" [maxSize]="5" [rotate]="true" [boundaryLinks]="true" (pageChange)="loadPage($event)"></ngb-pagination>
+        </div>
+    </div>
+</div>

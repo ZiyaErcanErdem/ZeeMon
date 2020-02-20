@@ -1,0 +1,42 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="contentMapper">
+            <h2><span jhiTranslate="zeemonApp.contentMapper.detail.title">Content Mapper</span> {{ contentMapper.id }}</h2>
+
+            <hr>
+
+            <jhi-alert-error></jhi-alert-error>
+
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="zeemonApp.contentMapper.mapperName">Mapper Name</span></dt>
+                <dd>
+                    <span>{{ contentMapper.mapperName }}</span>
+                </dd>
+                <dt><span jhiTranslate="zeemonApp.contentMapper.itemFormat">Item Format</span></dt>
+                <dd>
+                    <span jhiTranslate="{{ 'zeemonApp.ItemFormat.' + contentMapper.itemFormat }}">{{ contentMapper.itemFormat }}</span>
+                </dd>
+                <dt><span jhiTranslate="zeemonApp.contentMapper.containsHeader">Contains Header</span></dt>
+                <dd>
+                    <span>{{ contentMapper.containsHeader }}</span>
+                </dd>
+                <dt><span jhiTranslate="zeemonApp.contentMapper.fieldDelimiter">Field Delimiter</span></dt>
+                <dd>
+                    <span>{{ contentMapper.fieldDelimiter }}</span>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/content-mapper', contentMapper.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,69 @@
+{
+    "name": "TaskExecution",
+    "fields": [
+        {
+            "fieldName": "executionStartTime",
+            "fieldType": "Instant",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "executionEndTime",
+            "fieldType": "Instant",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "executionStatus",
+            "fieldType": "ExecutionStatus",
+            "fieldValues": "PENDING,EXECUTING,CANCELLED,SUCCESS,FAILED",
+            "fieldValidateRules": [
+                "required"
+            ]
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "content",
+            "otherEntityRelationshipName": "taskExecution",
+            "relationshipName": "content"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "contentValidationError",
+            "otherEntityRelationshipName": "taskExecution",
+            "relationshipName": "contentValidationError"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "task",
+            "otherEntityRelationshipName": "taskExecution",
+            "relationshipValidateRules": "required",
+            "relationshipName": "task",
+            "otherEntityField": "taskName"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "flowExecution",
+            "otherEntityRelationshipName": "taskExecution",
+            "relationshipValidateRules": "required",
+            "relationshipName": "flowExecution",
+            "otherEntityField": "id"
+        }
+    ],
+    "changelogDate": "20191031122714",
+    "entityTableName": "task_execution",
+    "dto": "no",
+    "pagination": "pagination",
+    "service": "serviceClass",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": [
+        "zeemon"
+    ],
+    "microserviceName": "zeemonManager"
+}

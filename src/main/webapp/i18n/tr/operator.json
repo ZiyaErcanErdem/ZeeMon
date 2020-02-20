@@ -1,0 +1,26 @@
+{
+    "dynamic": {
+        "Operator" : {
+            "null": "",
+            "UNKNOWN": "---",
+            "EQ": "Eşit Olan",
+            "LIKE": "İçeren",
+            "SW": "Başlayan",
+            "EW": "Biten",
+            "BETWEEN": "Arasında",
+            "GT": "Büyük",
+            "LT": "Küçük",
+            "GTE": "Büyük Eşit",
+            "LTE": "Küçük Eşit",
+            "IN": "Herhangi Biri",
+            "NOT_EQ": "Eşit Olmayan",
+            "NOT_LIKE": "İçermeyen",
+            "NOT_SW": "Başlamayan",
+            "NOT_EW": "Bitmeyen",
+            "NOT_IN": "Hiç Biri",
+
+            "IS_NULL": "Boş Olan",
+            "IS_NOT_NULL": "Boş Olmayan"
+        }
+    }
+}

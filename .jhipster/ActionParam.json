@@ -1,0 +1,60 @@
+{
+    "name": "ActionParam",
+    "fields": [
+        {
+            "fieldName": "paramName",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required",
+                "maxlength"
+            ],
+            "fieldValidateRulesMaxlength": 255
+        },
+        {
+            "fieldName": "paramDataType",
+            "fieldType": "DataType",
+            "fieldValues": "STRING,NUMBER,DATE,BOOLEAN",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "paramValue",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "maxlength"
+            ],
+            "fieldValidateRulesMaxlength": 255
+        },
+        {
+            "fieldName": "paramExpression",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "maxlength"
+            ],
+            "fieldValidateRulesMaxlength": 255
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "actionScript",
+            "otherEntityRelationshipName": "actionParam",
+            "relationshipValidateRules": "required",
+            "relationshipName": "actionScript",
+            "otherEntityField": "scriptName"
+        }
+    ],
+    "changelogDate": "20191031122716",
+    "entityTableName": "action_param",
+    "dto": "no",
+    "pagination": "pagination",
+    "service": "serviceClass",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": [
+        "zeemon"
+    ],
+    "microserviceName": "zeemonManager"
+}

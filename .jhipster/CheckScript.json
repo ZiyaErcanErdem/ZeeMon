@@ -1,0 +1,86 @@
+{
+    "name": "CheckScript",
+    "fields": [
+        {
+            "fieldName": "scriptName",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required",
+                "maxlength"
+            ],
+            "fieldValidateRulesMaxlength": 255
+        },
+        {
+            "fieldName": "scriptType",
+            "fieldType": "ScriptType",
+            "fieldValues": "SQL_SCRIPT,SHELL_SCRIPT",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "scriptSource",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "maxlength"
+            ],
+            "fieldValidateRulesMaxlength": 2048
+        },
+        {
+            "fieldName": "actionRuleExpression",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "maxlength"
+            ],
+            "fieldValidateRulesMaxlength": 2048
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "scriptParam",
+            "otherEntityRelationshipName": "checkScript",
+            "relationshipName": "scriptParam"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "task",
+            "otherEntityRelationshipName": "checkScript",
+            "relationshipName": "task"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "content",
+            "otherEntityRelationshipName": "checkScript",
+            "relationshipName": "content"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "endpoint",
+            "otherEntityRelationshipName": "checkScript",
+            "relationshipValidateRules": "required",
+            "relationshipName": "endpoint",
+            "otherEntityField": "endpointName"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "contentMapper",
+            "otherEntityRelationshipName": "checkScript",
+            "relationshipValidateRules": "required",
+            "relationshipName": "contentMapper",
+            "otherEntityField": "mapperName"
+        }
+    ],
+    "changelogDate": "20191031122723",
+    "entityTableName": "check_script",
+    "dto": "no",
+    "pagination": "pagination",
+    "service": "serviceClass",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": [
+        "zeemon"
+    ],
+    "microserviceName": "zeemonManager"
+}

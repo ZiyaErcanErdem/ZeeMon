@@ -1,0 +1,211 @@
+<div>
+    <h2 id="page-heading">
+        <span jhiTranslate="zeemonApp.content.home.title">Contents</span>
+
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-content" [routerLink]="['/content/new']">
+            <fa-icon icon="plus"></fa-icon>
+            <span  jhiTranslate="zeemonApp.content.home.createLabel">
+            Create a new Content
+            </span>
+        </button>
+    </h2>
+
+    <jhi-alert-error></jhi-alert-error>
+
+    <jhi-alert></jhi-alert>
+
+    <div class="alert alert-warning" id="no-result" *ngIf="contents?.length === 0">
+        <span jhiTranslate="zeemonApp.content.home.notFound">No contents found</span>
+    </div>
+
+    <div class="table-responsive" id="entities" *ngIf="contents?.length > 0">
+        <table class="table table-striped" aria-describedby="page-heading">
+            <thead>
+                <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" [callback]="loadPage.bind(this)">
+                    <th scope="col"  jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="sourceIndex"><span jhiTranslate="zeemonApp.content.sourceIndex">Source Index</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="txt1"><span jhiTranslate="zeemonApp.content.txt1">Txt 1</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="txt2"><span jhiTranslate="zeemonApp.content.txt2">Txt 2</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="txt3"><span jhiTranslate="zeemonApp.content.txt3">Txt 3</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="txt4"><span jhiTranslate="zeemonApp.content.txt4">Txt 4</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="txt5"><span jhiTranslate="zeemonApp.content.txt5">Txt 5</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="txt6"><span jhiTranslate="zeemonApp.content.txt6">Txt 6</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="txt7"><span jhiTranslate="zeemonApp.content.txt7">Txt 7</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="txt8"><span jhiTranslate="zeemonApp.content.txt8">Txt 8</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="txt9"><span jhiTranslate="zeemonApp.content.txt9">Txt 9</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="txt10"><span jhiTranslate="zeemonApp.content.txt10">Txt 10</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="txt11"><span jhiTranslate="zeemonApp.content.txt11">Txt 11</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="txt12"><span jhiTranslate="zeemonApp.content.txt12">Txt 12</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="txt13"><span jhiTranslate="zeemonApp.content.txt13">Txt 13</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="txt14"><span jhiTranslate="zeemonApp.content.txt14">Txt 14</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="txt15"><span jhiTranslate="zeemonApp.content.txt15">Txt 15</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="txt16"><span jhiTranslate="zeemonApp.content.txt16">Txt 16</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="txt17"><span jhiTranslate="zeemonApp.content.txt17">Txt 17</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="txt18"><span jhiTranslate="zeemonApp.content.txt18">Txt 18</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="txt19"><span jhiTranslate="zeemonApp.content.txt19">Txt 19</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="txt20"><span jhiTranslate="zeemonApp.content.txt20">Txt 20</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="num1"><span jhiTranslate="zeemonApp.content.num1">Num 1</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="num2"><span jhiTranslate="zeemonApp.content.num2">Num 2</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="num3"><span jhiTranslate="zeemonApp.content.num3">Num 3</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="num4"><span jhiTranslate="zeemonApp.content.num4">Num 4</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="num5"><span jhiTranslate="zeemonApp.content.num5">Num 5</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="num6"><span jhiTranslate="zeemonApp.content.num6">Num 6</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="num7"><span jhiTranslate="zeemonApp.content.num7">Num 7</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="num8"><span jhiTranslate="zeemonApp.content.num8">Num 8</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="num9"><span jhiTranslate="zeemonApp.content.num9">Num 9</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="num10"><span jhiTranslate="zeemonApp.content.num10">Num 10</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="num11"><span jhiTranslate="zeemonApp.content.num11">Num 11</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="num12"><span jhiTranslate="zeemonApp.content.num12">Num 12</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="num13"><span jhiTranslate="zeemonApp.content.num13">Num 13</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="num14"><span jhiTranslate="zeemonApp.content.num14">Num 14</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="num15"><span jhiTranslate="zeemonApp.content.num15">Num 15</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="num16"><span jhiTranslate="zeemonApp.content.num16">Num 16</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="num17"><span jhiTranslate="zeemonApp.content.num17">Num 17</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="num18"><span jhiTranslate="zeemonApp.content.num18">Num 18</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="num19"><span jhiTranslate="zeemonApp.content.num19">Num 19</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="num20"><span jhiTranslate="zeemonApp.content.num20">Num 20</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="date1"><span jhiTranslate="zeemonApp.content.date1">Date 1</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="date2"><span jhiTranslate="zeemonApp.content.date2">Date 2</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="date3"><span jhiTranslate="zeemonApp.content.date3">Date 3</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="date4"><span jhiTranslate="zeemonApp.content.date4">Date 4</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="date5"><span jhiTranslate="zeemonApp.content.date5">Date 5</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="date6"><span jhiTranslate="zeemonApp.content.date6">Date 6</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="date7"><span jhiTranslate="zeemonApp.content.date7">Date 7</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="date8"><span jhiTranslate="zeemonApp.content.date8">Date 8</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="date9"><span jhiTranslate="zeemonApp.content.date9">Date 9</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="date10"><span jhiTranslate="zeemonApp.content.date10">Date 10</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="bool1"><span jhiTranslate="zeemonApp.content.bool1">Bool 1</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="bool2"><span jhiTranslate="zeemonApp.content.bool2">Bool 2</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="bool3"><span jhiTranslate="zeemonApp.content.bool3">Bool 3</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="bool4"><span jhiTranslate="zeemonApp.content.bool4">Bool 4</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="bool5"><span jhiTranslate="zeemonApp.content.bool5">Bool 5</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="checkScript.scriptName"><span jhiTranslate="zeemonApp.content.checkScript">Check Script</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="flow.flowName"><span jhiTranslate="zeemonApp.content.flow">Flow</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="task.taskName"><span jhiTranslate="zeemonApp.content.task">Task</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="taskExecution.id"><span jhiTranslate="zeemonApp.content.taskExecution">Task Execution</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="flowExecution.id"><span jhiTranslate="zeemonApp.content.flowExecution">Flow Execution</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let content of contents ;trackBy: trackId">
+                    <td><a [routerLink]="['/content', content.id, 'view']">{{ content.id }}</a></td>
+                    <td>{{ content.sourceIndex }}</td>
+                    <td>{{ content.txt1 }}</td>
+                    <td>{{ content.txt2 }}</td>
+                    <td>{{ content.txt3 }}</td>
+                    <td>{{ content.txt4 }}</td>
+                    <td>{{ content.txt5 }}</td>
+                    <td>{{ content.txt6 }}</td>
+                    <td>{{ content.txt7 }}</td>
+                    <td>{{ content.txt8 }}</td>
+                    <td>{{ content.txt9 }}</td>
+                    <td>{{ content.txt10 }}</td>
+                    <td>{{ content.txt11 }}</td>
+                    <td>{{ content.txt12 }}</td>
+                    <td>{{ content.txt13 }}</td>
+                    <td>{{ content.txt14 }}</td>
+                    <td>{{ content.txt15 }}</td>
+                    <td>{{ content.txt16 }}</td>
+                    <td>{{ content.txt17 }}</td>
+                    <td>{{ content.txt18 }}</td>
+                    <td>{{ content.txt19 }}</td>
+                    <td>{{ content.txt20 }}</td>
+                    <td>{{ content.num1 }}</td>
+                    <td>{{ content.num2 }}</td>
+                    <td>{{ content.num3 }}</td>
+                    <td>{{ content.num4 }}</td>
+                    <td>{{ content.num5 }}</td>
+                    <td>{{ content.num6 }}</td>
+                    <td>{{ content.num7 }}</td>
+                    <td>{{ content.num8 }}</td>
+                    <td>{{ content.num9 }}</td>
+                    <td>{{ content.num10 }}</td>
+                    <td>{{ content.num11 }}</td>
+                    <td>{{ content.num12 }}</td>
+                    <td>{{ content.num13 }}</td>
+                    <td>{{ content.num14 }}</td>
+                    <td>{{ content.num15 }}</td>
+                    <td>{{ content.num16 }}</td>
+                    <td>{{ content.num17 }}</td>
+                    <td>{{ content.num18 }}</td>
+                    <td>{{ content.num19 }}</td>
+                    <td>{{ content.num20 }}</td>
+                    <td>{{ content.date1 | date:'medium' }}</td>
+                    <td>{{ content.date2 | date:'medium' }}</td>
+                    <td>{{ content.date3 | date:'medium' }}</td>
+                    <td>{{ content.date4 | date:'medium' }}</td>
+                    <td>{{ content.date5 | date:'medium' }}</td>
+                    <td>{{ content.date6 | date:'medium' }}</td>
+                    <td>{{ content.date7 | date:'medium' }}</td>
+                    <td>{{ content.date8 | date:'medium' }}</td>
+                    <td>{{ content.date9 | date:'medium' }}</td>
+                    <td>{{ content.date10 | date:'medium' }}</td>
+                    <td>{{ content.bool1 | date:'medium' }}</td>
+                    <td>{{ content.bool2 | date:'medium' }}</td>
+                    <td>{{ content.bool3 | date:'medium' }}</td>
+                    <td>{{ content.bool4 | date:'medium' }}</td>
+                    <td>{{ content.bool5 | date:'medium' }}</td>
+                    <td>
+                        <div *ngIf="content.checkScript">
+                            <a [routerLink]="['/check-script', content.checkScript?.id, 'view']" >{{ content.checkScript?.scriptName }}</a>
+                        </div>
+                    </td>
+                    <td>
+                        <div *ngIf="content.flow">
+                            <a [routerLink]="['/flow', content.flow?.id, 'view']" >{{ content.flow?.flowName }}</a>
+                        </div>
+                    </td>
+                    <td>
+                        <div *ngIf="content.task">
+                            <a [routerLink]="['/task', content.task?.id, 'view']" >{{ content.task?.taskName }}</a>
+                        </div>
+                    </td>
+                    <td>
+                        <div *ngIf="content.taskExecution">
+                            <a [routerLink]="['/task-execution', content.taskExecution?.id, 'view']" >{{ content.taskExecution?.id }}</a>
+                        </div>
+                    </td>
+                    <td>
+                        <div *ngIf="content.flowExecution">
+                            <a [routerLink]="['/flow-execution', content.flowExecution?.id, 'view']" >{{ content.flowExecution?.id }}</a>
+                        </div>
+                    </td>
+                    <td class="text-right">
+                        <div class="btn-group">
+                            <button type="submit"
+                                    [routerLink]="['/content', content.id, 'view']"
+                                    class="btn btn-info btn-sm">
+                                <fa-icon icon="eye"></fa-icon>
+                                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                            </button>
+
+                            <button type="submit"
+                                    [routerLink]="['/content', content.id, 'edit']"
+                                    class="btn btn-primary btn-sm">
+                                <fa-icon icon="pencil-alt"></fa-icon>
+                                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                            </button>
+
+                            <button type="submit" (click)="delete(content)"
+                                    class="btn btn-danger btn-sm">
+                                <fa-icon icon="times"></fa-icon>
+                                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div *ngIf="contents?.length > 0">
+        <div class="row justify-content-center">
+            <jhi-item-count [page]="page" [total]="totalItems" [itemsPerPage]="itemsPerPage"></jhi-item-count>
+        </div>
+
+        <div class="row justify-content-center">
+            <ngb-pagination [collectionSize]="totalItems" [(page)]="ngbPaginationPage" [pageSize]="itemsPerPage" [maxSize]="5" [rotate]="true" [boundaryLinks]="true" (pageChange)="loadPage($event)"></ngb-pagination>
+        </div>
+    </div>
+</div>

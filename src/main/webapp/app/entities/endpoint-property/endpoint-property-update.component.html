@@ -1,0 +1,128 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+            <h2 id="jhi-endpoint-property-heading" jhiTranslate="zeemonApp.endpointProperty.home.createOrEditLabel">Create or edit a Endpoint Property</h2>
+
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+
+                <div class="form-group" [hidden]="!editForm.get('id')!.value">
+                    <label for="id" jhiTranslate="global.field.id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id" formControlName="id" readonly />
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="zeemonApp.endpointProperty.propKey" for="field_propKey">Prop Key</label>
+                    <input type="text" class="form-control" name="propKey" id="field_propKey"
+                           formControlName="propKey"/>
+                    <div *ngIf="editForm.get('propKey')!.invalid && (editForm.get('propKey')!.dirty || editForm.get('propKey')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('propKey')?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('propKey')?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: 100 }">
+                        This field cannot be longer than 100 characters.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="zeemonApp.endpointProperty.propKeyType" for="field_propKeyType">Prop Key Type</label>
+                    <select class="form-control" name="propKeyType" formControlName="propKeyType" id="field_propKeyType">
+                        <option value="ANY">{{ 'zeemonApp.PropKeyType.ANY' | translate }}</option>
+                        <option value="SCHEMA">{{ 'zeemonApp.PropKeyType.SCHEMA' | translate }}</option>
+                        <option value="HOST">{{ 'zeemonApp.PropKeyType.HOST' | translate }}</option>
+                        <option value="PORT">{{ 'zeemonApp.PropKeyType.PORT' | translate }}</option>
+                        <option value="URI">{{ 'zeemonApp.PropKeyType.URI' | translate }}</option>
+                        <option value="BASEPATH">{{ 'zeemonApp.PropKeyType.BASEPATH' | translate }}</option>
+                        <option value="UID">{{ 'zeemonApp.PropKeyType.UID' | translate }}</option>
+                        <option value="PASSWORD">{{ 'zeemonApp.PropKeyType.PASSWORD' | translate }}</option>
+                        <option value="CLIENT_ID">{{ 'zeemonApp.PropKeyType.CLIENT_ID' | translate }}</option>
+                        <option value="CLIENT_SECRET">{{ 'zeemonApp.PropKeyType.CLIENT_SECRET' | translate }}</option>
+                        <option value="CLIENT_AUDIENCE">{{ 'zeemonApp.PropKeyType.CLIENT_AUDIENCE' | translate }}</option>
+                        <option value="CLIENT_SCOPE">{{ 'zeemonApp.PropKeyType.CLIENT_SCOPE' | translate }}</option>
+                        <option value="KEYSTORE_TYPE">{{ 'zeemonApp.PropKeyType.KEYSTORE_TYPE' | translate }}</option>
+                        <option value="KEYSTORE_PATH">{{ 'zeemonApp.PropKeyType.KEYSTORE_PATH' | translate }}</option>
+                        <option value="KEYSTORE_ALIAS">{{ 'zeemonApp.PropKeyType.KEYSTORE_ALIAS' | translate }}</option>
+                        <option value="KEYSTORE_PASSWORD">{{ 'zeemonApp.PropKeyType.KEYSTORE_PASSWORD' | translate }}</option>
+                    </select>
+                    <div *ngIf="editForm.get('propKeyType')!.invalid && (editForm.get('propKeyType')!.dirty || editForm.get('propKeyType')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('propKeyType')?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="zeemonApp.endpointProperty.propValue" for="field_propValue">Prop Value</label>
+                    <input type="text" class="form-control" name="propValue" id="field_propValue"
+                           formControlName="propValue"/>
+                    <div *ngIf="editForm.get('propValue')!.invalid && (editForm.get('propValue')!.dirty || editForm.get('propValue')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('propValue')?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('propValue')?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: 512 }">
+                        This field cannot be longer than 512 characters.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="zeemonApp.endpointProperty.propValueType" for="field_propValueType">Prop Value Type</label>
+                    <select class="form-control" name="propValueType" formControlName="propValueType" id="field_propValueType">
+                        <option value="STRING">{{ 'zeemonApp.DataType.STRING' | translate }}</option>
+                        <option value="NUMBER">{{ 'zeemonApp.DataType.NUMBER' | translate }}</option>
+                        <option value="DATE">{{ 'zeemonApp.DataType.DATE' | translate }}</option>
+                        <option value="BOOLEAN">{{ 'zeemonApp.DataType.BOOLEAN' | translate }}</option>
+                    </select>
+                    <div *ngIf="editForm.get('propValueType')!.invalid && (editForm.get('propValueType')!.dirty || editForm.get('propValueType')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('propValueType')?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="zeemonApp.endpointProperty.propDescription" for="field_propDescription">Prop Description</label>
+                    <input type="text" class="form-control" name="propDescription" id="field_propDescription"
+                           formControlName="propDescription"/>
+                    <div *ngIf="editForm.get('propDescription')!.invalid && (editForm.get('propDescription')!.dirty || editForm.get('propDescription')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('propDescription')?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: 512 }">
+                        This field cannot be longer than 512 characters.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="zeemonApp.endpointProperty.endpoint" for="field_endpoint">Endpoint</label>
+                    <select class="form-control" id="field_endpoint" name="endpoint" formControlName="endpoint">
+                        <option *ngIf="!editForm.get('endpoint')!.value" [ngValue]="null" selected></option>
+                        <option [ngValue]="endpointOption.id === editForm.get('endpoint')!.value?.id ? editForm.get('endpoint')!.value : endpointOption" *ngFor="let endpointOption of endpoints; trackBy: trackById">{{ endpointOption.endpointName }}</option>
+                    </select>
+                </div>
+                <div *ngIf="editForm.get('endpoint')!.invalid && (editForm.get('endpoint')!.dirty || editForm.get('endpoint')!.touched)">
+                    <small class="form-text text-danger"
+                           *ngIf="editForm.get('endpoint')?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                    </small>
+                </div>
+            </div>
+
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
+                    <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+                </button>
+
+                <button type="submit" id="save-entity" [disabled]="editForm.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

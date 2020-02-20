@@ -1,0 +1,56 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="flowExecution">
+            <h2><span jhiTranslate="zeemonApp.flowExecution.detail.title">Flow Execution</span> {{ flowExecution.id }}</h2>
+
+            <hr>
+
+            <jhi-alert-error></jhi-alert-error>
+
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="zeemonApp.flowExecution.executionStartTime">Execution Start Time</span></dt>
+                <dd>
+                    <span>{{ flowExecution.executionStartTime }}</span>
+                </dd>
+                <dt><span jhiTranslate="zeemonApp.flowExecution.executionEndTime">Execution End Time</span></dt>
+                <dd>
+                    <span>{{ flowExecution.executionEndTime }}</span>
+                </dd>
+                <dt><span jhiTranslate="zeemonApp.flowExecution.totalTaskCount">Total Task Count</span></dt>
+                <dd>
+                    <span>{{ flowExecution.totalTaskCount }}</span>
+                </dd>
+                <dt><span jhiTranslate="zeemonApp.flowExecution.runningTaskCount">Running Task Count</span></dt>
+                <dd>
+                    <span>{{ flowExecution.runningTaskCount }}</span>
+                </dd>
+                <dt><span jhiTranslate="zeemonApp.flowExecution.errorTaskCount">Error Task Count</span></dt>
+                <dd>
+                    <span>{{ flowExecution.errorTaskCount }}</span>
+                </dd>
+                <dt><span jhiTranslate="zeemonApp.flowExecution.executionStatus">Execution Status</span></dt>
+                <dd>
+                    <span jhiTranslate="{{ 'zeemonApp.ExecutionStatus.' + flowExecution.executionStatus }}">{{ flowExecution.executionStatus }}</span>
+                </dd>
+                <dt><span jhiTranslate="zeemonApp.flowExecution.flow">Flow</span></dt>
+                <dd>
+                    <div *ngIf="flowExecution.flow">
+                        <a [routerLink]="['/flow', flowExecution.flow?.id, 'view']">{{ flowExecution.flow?.flowName }}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/flow-execution', flowExecution.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,60 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="task">
+            <h2><span jhiTranslate="zeemonApp.task.detail.title">Task</span> {{ task.id }}</h2>
+
+            <hr>
+
+            <jhi-alert-error></jhi-alert-error>
+
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="zeemonApp.task.taskName">Task Name</span></dt>
+                <dd>
+                    <span>{{ task.taskName }}</span>
+                </dd>
+                <dt><span jhiTranslate="zeemonApp.task.taskDescription">Task Description</span></dt>
+                <dd>
+                    <span>{{ task.taskDescription }}</span>
+                </dd>
+                <dt><span jhiTranslate="zeemonApp.task.nextExecutionStartTime">Next Execution Start Time</span></dt>
+                <dd>
+                    <span>{{ task.nextExecutionStartTime }}</span>
+                </dd>
+                <dt><span jhiTranslate="zeemonApp.task.taskState">Task State</span></dt>
+                <dd>
+                    <span jhiTranslate="{{ 'zeemonApp.TaskState.' + task.taskState }}">{{ task.taskState }}</span>
+                </dd>
+                <dt><span jhiTranslate="zeemonApp.task.agent">Agent</span></dt>
+                <dd>
+                    <div *ngIf="task.agent">
+                        <a [routerLink]="['/agent', task.agent?.id, 'view']">{{ task.agent?.agentName }}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="zeemonApp.task.checkScript">Check Script</span></dt>
+                <dd>
+                    <div *ngIf="task.checkScript">
+                        <a [routerLink]="['/check-script', task.checkScript?.id, 'view']">{{ task.checkScript?.scriptName }}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="zeemonApp.task.flow">Flow</span></dt>
+                <dd>
+                    <div *ngIf="task.flow">
+                        <a [routerLink]="['/flow', task.flow?.id, 'view']">{{ task.flow?.flowName }}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/task', task.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

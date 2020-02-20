@@ -1,0 +1,112 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+            <h2 id="jhi-task-heading" jhiTranslate="zeemonApp.task.home.createOrEditLabel">Create or edit a Task</h2>
+
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+
+                <div class="form-group" [hidden]="!editForm.get('id')!.value">
+                    <label for="id" jhiTranslate="global.field.id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id" formControlName="id" readonly />
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="zeemonApp.task.taskName" for="field_taskName">Task Name</label>
+                    <input type="text" class="form-control" name="taskName" id="field_taskName"
+                           formControlName="taskName"/>
+                    <div *ngIf="editForm.get('taskName')!.invalid && (editForm.get('taskName')!.dirty || editForm.get('taskName')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('taskName')?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('taskName')?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: 255 }">
+                        This field cannot be longer than 255 characters.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="zeemonApp.task.taskDescription" for="field_taskDescription">Task Description</label>
+                    <input type="text" class="form-control" name="taskDescription" id="field_taskDescription"
+                           formControlName="taskDescription"/>
+                    <div *ngIf="editForm.get('taskDescription')!.invalid && (editForm.get('taskDescription')!.dirty || editForm.get('taskDescription')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('taskDescription')?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: 512 }">
+                        This field cannot be longer than 512 characters.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="zeemonApp.task.nextExecutionStartTime" for="field_nextExecutionStartTime">Next Execution Start Time</label>
+                    <div class="d-flex">
+                        <input id="field_nextExecutionStartTime" type="datetime-local" class="form-control" name="nextExecutionStartTime" formControlName="nextExecutionStartTime" placeholder="YYYY-MM-DD HH:mm"/>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="zeemonApp.task.taskState" for="field_taskState">Task State</label>
+                    <select class="form-control" name="taskState" formControlName="taskState" id="field_taskState">
+                        <option value="PENDING">{{ 'zeemonApp.TaskState.PENDING' | translate }}</option>
+                        <option value="PAUSED">{{ 'zeemonApp.TaskState.PAUSED' | translate }}</option>
+                        <option value="PROCESSING">{{ 'zeemonApp.TaskState.PROCESSING' | translate }}</option>
+                    </select>
+                    <div *ngIf="editForm.get('taskState')!.invalid && (editForm.get('taskState')!.dirty || editForm.get('taskState')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('taskState')?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="zeemonApp.task.agent" for="field_agent">Agent</label>
+                    <select class="form-control" id="field_agent" name="agent" formControlName="agent">
+                        <option *ngIf="!editForm.get('agent')!.value" [ngValue]="null" selected></option>
+                        <option [ngValue]="agentOption.id === editForm.get('agent')!.value?.id ? editForm.get('agent')!.value : agentOption" *ngFor="let agentOption of agents; trackBy: trackById">{{ agentOption.agentName }}</option>
+                    </select>
+                </div>
+                <div *ngIf="editForm.get('agent')!.invalid && (editForm.get('agent')!.dirty || editForm.get('agent')!.touched)">
+                    <small class="form-text text-danger"
+                           *ngIf="editForm.get('agent')?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                    </small>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="zeemonApp.task.checkScript" for="field_checkScript">Check Script</label>
+                    <select class="form-control" id="field_checkScript" name="checkScript" formControlName="checkScript">
+                        <option *ngIf="!editForm.get('checkScript')!.value" [ngValue]="null" selected></option>
+                        <option [ngValue]="checkScriptOption.id === editForm.get('checkScript')!.value?.id ? editForm.get('checkScript')!.value : checkScriptOption" *ngFor="let checkScriptOption of checkscripts; trackBy: trackById">{{ checkScriptOption.scriptName }}</option>
+                    </select>
+                </div>
+                <div *ngIf="editForm.get('checkScript')!.invalid && (editForm.get('checkScript')!.dirty || editForm.get('checkScript')!.touched)">
+                    <small class="form-text text-danger"
+                           *ngIf="editForm.get('checkScript')?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                    </small>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="zeemonApp.task.flow" for="field_flow">Flow</label>
+                    <select class="form-control" id="field_flow" name="flow" formControlName="flow">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="flowOption.id === editForm.get('flow')!.value?.id ? editForm.get('flow')!.value : flowOption" *ngFor="let flowOption of flows; trackBy: trackById">{{ flowOption.flowName }}</option>
+                    </select>
+                </div>
+            </div>
+
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
+                    <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+                </button>
+
+                <button type="submit" id="save-entity" [disabled]="editForm.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

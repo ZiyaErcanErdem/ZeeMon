@@ -1,0 +1,89 @@
+<div>
+    <h2 id="page-heading">
+        <span jhiTranslate="zeemonApp.checkScript.home.title">Check Scripts</span>
+
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-check-script" [routerLink]="['/check-script/new']">
+            <fa-icon icon="plus"></fa-icon>
+            <span  jhiTranslate="zeemonApp.checkScript.home.createLabel">
+            Create a new Check Script
+            </span>
+        </button>
+    </h2>
+
+    <jhi-alert-error></jhi-alert-error>
+
+    <jhi-alert></jhi-alert>
+
+    <div class="alert alert-warning" id="no-result" *ngIf="checkScripts?.length === 0">
+        <span jhiTranslate="zeemonApp.checkScript.home.notFound">No checkScripts found</span>
+    </div>
+
+    <div class="table-responsive" id="entities" *ngIf="checkScripts?.length > 0">
+        <table class="table table-striped" aria-describedby="page-heading">
+            <thead>
+                <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" [callback]="loadPage.bind(this)">
+                    <th scope="col"  jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="scriptName"><span jhiTranslate="zeemonApp.checkScript.scriptName">Script Name</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="scriptType"><span jhiTranslate="zeemonApp.checkScript.scriptType">Script Type</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="scriptSource"><span jhiTranslate="zeemonApp.checkScript.scriptSource">Script Source</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="actionRuleExpression"><span jhiTranslate="zeemonApp.checkScript.actionRuleExpression">Action Rule Expression</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="endpoint.endpointName"><span jhiTranslate="zeemonApp.checkScript.endpoint">Endpoint</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="contentMapper.mapperName"><span jhiTranslate="zeemonApp.checkScript.contentMapper">Content Mapper</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let checkScript of checkScripts ;trackBy: trackId">
+                    <td><a [routerLink]="['/check-script', checkScript.id, 'view']">{{ checkScript.id }}</a></td>
+                    <td>{{ checkScript.scriptName }}</td>
+                    <td jhiTranslate="{{ 'zeemonApp.ScriptType.' + checkScript.scriptType }}">{{ checkScript.scriptType }}</td>
+                    <td>{{ checkScript.scriptSource }}</td>
+                    <td>{{ checkScript.actionRuleExpression }}</td>
+                    <td>
+                        <div *ngIf="checkScript.endpoint">
+                            <a [routerLink]="['/endpoint', checkScript.endpoint?.id, 'view']" >{{ checkScript.endpoint?.endpointName }}</a>
+                        </div>
+                    </td>
+                    <td>
+                        <div *ngIf="checkScript.contentMapper">
+                            <a [routerLink]="['/content-mapper', checkScript.contentMapper?.id, 'view']" >{{ checkScript.contentMapper?.mapperName }}</a>
+                        </div>
+                    </td>
+                    <td class="text-right">
+                        <div class="btn-group">
+                            <button type="submit"
+                                    [routerLink]="['/check-script', checkScript.id, 'view']"
+                                    class="btn btn-info btn-sm">
+                                <fa-icon icon="eye"></fa-icon>
+                                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                            </button>
+
+                            <button type="submit"
+                                    [routerLink]="['/check-script', checkScript.id, 'edit']"
+                                    class="btn btn-primary btn-sm">
+                                <fa-icon icon="pencil-alt"></fa-icon>
+                                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                            </button>
+
+                            <button type="submit" (click)="delete(checkScript)"
+                                    class="btn btn-danger btn-sm">
+                                <fa-icon icon="times"></fa-icon>
+                                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div *ngIf="checkScripts?.length > 0">
+        <div class="row justify-content-center">
+            <jhi-item-count [page]="page" [total]="totalItems" [itemsPerPage]="itemsPerPage"></jhi-item-count>
+        </div>
+
+        <div class="row justify-content-center">
+            <ngb-pagination [collectionSize]="totalItems" [(page)]="ngbPaginationPage" [pageSize]="itemsPerPage" [maxSize]="5" [rotate]="true" [boundaryLinks]="true" (pageChange)="loadPage($event)"></ngb-pagination>
+        </div>
+    </div>
+</div>

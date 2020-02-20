@@ -1,0 +1,76 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="fieldMapping">
+            <h2><span jhiTranslate="zeemonApp.fieldMapping.detail.title">Field Mapping</span> {{ fieldMapping.id }}</h2>
+
+            <hr>
+
+            <jhi-alert-error></jhi-alert-error>
+
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="zeemonApp.fieldMapping.sourceIndex">Source Index</span></dt>
+                <dd>
+                    <span>{{ fieldMapping.sourceIndex }}</span>
+                </dd>
+                <dt><span jhiTranslate="zeemonApp.fieldMapping.sourceName">Source Name</span></dt>
+                <dd>
+                    <span>{{ fieldMapping.sourceName }}</span>
+                </dd>
+                <dt><span jhiTranslate="zeemonApp.fieldMapping.sourceFormat">Source Format</span></dt>
+                <dd>
+                    <span>{{ fieldMapping.sourceFormat }}</span>
+                </dd>
+                <dt><span jhiTranslate="zeemonApp.fieldMapping.sourceStartIndex">Source Start Index</span></dt>
+                <dd>
+                    <span>{{ fieldMapping.sourceStartIndex }}</span>
+                </dd>
+                <dt><span jhiTranslate="zeemonApp.fieldMapping.sourceEndIndex">Source End Index</span></dt>
+                <dd>
+                    <span>{{ fieldMapping.sourceEndIndex }}</span>
+                </dd>
+                <dt><span jhiTranslate="zeemonApp.fieldMapping.sourceDataType">Source Data Type</span></dt>
+                <dd>
+                    <span jhiTranslate="{{ 'zeemonApp.DataType.' + fieldMapping.sourceDataType }}">{{ fieldMapping.sourceDataType }}</span>
+                </dd>
+                <dt><span jhiTranslate="zeemonApp.fieldMapping.targetName">Target Name</span></dt>
+                <dd>
+                    <span>{{ fieldMapping.targetName }}</span>
+                </dd>
+                <dt><span jhiTranslate="zeemonApp.fieldMapping.targetColName">Target Col Name</span></dt>
+                <dd>
+                    <span>{{ fieldMapping.targetColName }}</span>
+                </dd>
+                <dt><span jhiTranslate="zeemonApp.fieldMapping.targetDataType">Target Data Type</span></dt>
+                <dd>
+                    <span jhiTranslate="{{ 'zeemonApp.DataType.' + fieldMapping.targetDataType }}">{{ fieldMapping.targetDataType }}</span>
+                </dd>
+                <dt><span jhiTranslate="zeemonApp.fieldMapping.transformation">Transformation</span></dt>
+                <dd>
+                    <span>{{ fieldMapping.transformation }}</span>
+                </dd>
+                <dt><span jhiTranslate="zeemonApp.fieldMapping.requiredData">Required Data</span></dt>
+                <dd>
+                    <span>{{ fieldMapping.requiredData }}</span>
+                </dd>
+                <dt><span jhiTranslate="zeemonApp.fieldMapping.contentMapper">Content Mapper</span></dt>
+                <dd>
+                    <div *ngIf="fieldMapping.contentMapper">
+                        <a [routerLink]="['/content-mapper', fieldMapping.contentMapper?.id, 'view']">{{ fieldMapping.contentMapper?.mapperName }}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/field-mapping', fieldMapping.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

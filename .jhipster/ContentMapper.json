@@ -1,0 +1,61 @@
+{
+    "name": "ContentMapper",
+    "fields": [
+        {
+            "fieldName": "mapperName",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required",
+                "maxlength"
+            ],
+            "fieldValidateRulesMaxlength": 255
+        },
+        {
+            "fieldName": "itemFormat",
+            "fieldType": "ItemFormat",
+            "fieldValues": "SQL_RESULTSET,JSON,XML,DELIMITED_TEXT,FIXED_LENGTH_TEXT,ANY",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "containsHeader",
+            "fieldType": "Boolean"
+        },
+        {
+            "fieldName": "fieldDelimiter",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required",
+                "maxlength"
+            ],
+            "fieldValidateRulesMaxlength": 50
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "checkScript",
+            "otherEntityRelationshipName": "contentMapper",
+            "relationshipName": "checkScript"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "fieldMapping",
+            "otherEntityRelationshipName": "contentMapper",
+            "relationshipName": "fieldMapping"
+        }
+    ],
+    "changelogDate": "20191031122724",
+    "entityTableName": "content_mapper",
+    "dto": "no",
+    "pagination": "pagination",
+    "service": "serviceClass",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": [
+        "zeemon"
+    ],
+    "microserviceName": "zeemonManager"
+}

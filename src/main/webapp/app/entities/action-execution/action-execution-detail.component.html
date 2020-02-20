@@ -1,0 +1,48 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="actionExecution">
+            <h2><span jhiTranslate="zeemonApp.actionExecution.detail.title">Action Execution</span> {{ actionExecution.id }}</h2>
+
+            <hr>
+
+            <jhi-alert-error></jhi-alert-error>
+
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="zeemonApp.actionExecution.executionStartTime">Execution Start Time</span></dt>
+                <dd>
+                    <span>{{ actionExecution.executionStartTime }}</span>
+                </dd>
+                <dt><span jhiTranslate="zeemonApp.actionExecution.executionEndTime">Execution End Time</span></dt>
+                <dd>
+                    <span>{{ actionExecution.executionEndTime }}</span>
+                </dd>
+                <dt><span jhiTranslate="zeemonApp.actionExecution.executionStatus">Execution Status</span></dt>
+                <dd>
+                    <span jhiTranslate="{{ 'zeemonApp.ExecutionStatus.' + actionExecution.executionStatus }}">{{ actionExecution.executionStatus }}</span>
+                </dd>
+                <dt><span jhiTranslate="zeemonApp.actionExecution.actionLog">Action Log</span></dt>
+                <dd>
+                    <span>{{ actionExecution.actionLog }}</span>
+                </dd>
+                <dt><span jhiTranslate="zeemonApp.actionExecution.action">Action</span></dt>
+                <dd>
+                    <div *ngIf="actionExecution.action">
+                        <a [routerLink]="['/action', actionExecution.action?.id, 'view']">{{ actionExecution.action?.actionName }}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/action-execution', actionExecution.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

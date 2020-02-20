@@ -1,0 +1,89 @@
+{
+    "name": "Task",
+    "fields": [
+        {
+            "fieldName": "taskName",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required",
+                "maxlength"
+            ],
+            "fieldValidateRulesMaxlength": 255
+        },
+        {
+            "fieldName": "taskDescription",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "maxlength"
+            ],
+            "fieldValidateRulesMaxlength": 512
+        },
+        {
+            "fieldName": "nextExecutionStartTime",
+            "fieldType": "Instant"
+        },
+        {
+            "fieldName": "taskState",
+            "fieldType": "TaskState",
+            "fieldValues": "PENDING,PAUSED,PROCESSING",
+            "fieldValidateRules": [
+                "required"
+            ]
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "taskExecution",
+            "otherEntityRelationshipName": "task",
+            "relationshipName": "taskExecution"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "content",
+            "otherEntityRelationshipName": "task",
+            "relationshipName": "content"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "contentValidationError",
+            "otherEntityRelationshipName": "task",
+            "relationshipName": "contentValidationError"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "agent",
+            "otherEntityRelationshipName": "task",
+            "relationshipValidateRules": "required",
+            "relationshipName": "agent",
+            "otherEntityField": "agentName"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "checkScript",
+            "otherEntityRelationshipName": "task",
+            "relationshipValidateRules": "required",
+            "relationshipName": "checkScript",
+            "otherEntityField": "scriptName"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "flow",
+            "otherEntityRelationshipName": "task",
+            "relationshipName": "flow",
+            "otherEntityField": "flowName"
+        }
+    ],
+    "changelogDate": "20191031122720",
+    "entityTableName": "task",
+    "dto": "no",
+    "pagination": "pagination",
+    "service": "serviceClass",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": [
+        "zeemon"
+    ],
+    "microserviceName": "zeemonManager"
+}

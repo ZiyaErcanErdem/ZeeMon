@@ -1,0 +1,85 @@
+{
+    "name": "FlowExecution",
+    "fields": [
+        {
+            "fieldName": "executionStartTime",
+            "fieldType": "Instant",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "executionEndTime",
+            "fieldType": "Instant",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "totalTaskCount",
+            "fieldType": "Integer",
+            "fieldValidateRules": [
+                "min"
+            ],
+            "fieldValidateRulesMin": 0
+        },
+        {
+            "fieldName": "runningTaskCount",
+            "fieldType": "Integer",
+            "fieldValidateRules": [
+                "min"
+            ],
+            "fieldValidateRulesMin": 0
+        },
+        {
+            "fieldName": "errorTaskCount",
+            "fieldType": "Integer",
+            "fieldValidateRules": [
+                "min"
+            ],
+            "fieldValidateRulesMin": 0
+        },
+        {
+            "fieldName": "executionStatus",
+            "fieldType": "ExecutionStatus",
+            "fieldValues": "PENDING,EXECUTING,CANCELLED,SUCCESS,FAILED",
+            "fieldValidateRules": [
+                "required"
+            ]
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "taskExecution",
+            "otherEntityRelationshipName": "flowExecution",
+            "relationshipName": "taskExecution"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "content",
+            "otherEntityRelationshipName": "flowExecution",
+            "relationshipName": "content"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "flow",
+            "otherEntityRelationshipName": "flowExecution",
+            "relationshipValidateRules": "required",
+            "relationshipName": "flow",
+            "otherEntityField": "flowName"
+        }
+    ],
+    "changelogDate": "20191031122713",
+    "entityTableName": "flow_execution",
+    "dto": "no",
+    "pagination": "pagination",
+    "service": "serviceClass",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": [
+        "zeemon"
+    ],
+    "microserviceName": "zeemonManager"
+}

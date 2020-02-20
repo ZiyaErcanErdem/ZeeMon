@@ -1,0 +1,81 @@
+{
+    "name": "ActionScript",
+    "fields": [
+        {
+            "fieldName": "actionCode",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required",
+                "maxlength"
+            ],
+            "fieldValidateRulesMaxlength": 20
+        },
+        {
+            "fieldName": "scriptName",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required",
+                "maxlength"
+            ],
+            "fieldValidateRulesMaxlength": 255
+        },
+        {
+            "fieldName": "scriptType",
+            "fieldType": "ScriptType",
+            "fieldValues": "SQL_SCRIPT,SHELL_SCRIPT",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "actionType",
+            "fieldType": "ActionType",
+            "fieldValues": "EMAIL,SMS,SCRIPT",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "actionSource",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "maxlength"
+            ],
+            "fieldValidateRulesMaxlength": 2048
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "actionParam",
+            "otherEntityRelationshipName": "actionScript",
+            "relationshipName": "actionParam"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "action",
+            "otherEntityRelationshipName": "actionScript",
+            "relationshipName": "action"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "endpoint",
+            "otherEntityRelationshipName": "actionScript",
+            "relationshipValidateRules": "required",
+            "relationshipName": "endpoint",
+            "otherEntityField": "endpointName"
+        }
+    ],
+    "changelogDate": "20191031122717",
+    "entityTableName": "action_script",
+    "dto": "no",
+    "pagination": "pagination",
+    "service": "serviceClass",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": [
+        "zeemon"
+    ],
+    "microserviceName": "zeemonManager"
+}

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.6.xsd">
+    <!--
+        Added the constraints for entity Content.
+    -->
+    <changeSet id="20191031122726-2" author="jhipster">
+        
+        <addForeignKeyConstraint baseColumnNames="check_script_id"
+                                 baseTableName="content"
+                                 constraintName="fk_content_check_script_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="check_script"/>
+
+        <addForeignKeyConstraint baseColumnNames="flow_id"
+                                 baseTableName="content"
+                                 constraintName="fk_content_flow_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="flow"/>
+
+        <addForeignKeyConstraint baseColumnNames="task_id"
+                                 baseTableName="content"
+                                 constraintName="fk_content_task_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="task"/>
+
+        <addForeignKeyConstraint baseColumnNames="task_execution_id"
+                                 baseTableName="content"
+                                 constraintName="fk_content_task_execution_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="task_execution"/>
+
+        <addForeignKeyConstraint baseColumnNames="flow_execution_id"
+                                 baseTableName="content"
+                                 constraintName="fk_content_flow_execution_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="flow_execution"/>
+
+    </changeSet>
+</databaseChangeLog>
