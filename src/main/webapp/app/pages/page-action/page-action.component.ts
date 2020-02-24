@@ -33,13 +33,13 @@ export class PageActionComponent extends BasePageComponent<Action> implements On
 
   constructor(dynamicService: DynamicService, private http: HttpClient, accountService: AccountService) {
     super('Action', dynamicService, accountService);
-    this.setGridCols('id', 'actionName', 'nextExecutionStartTime', 'actionState', 'actionScript.scriptName', 'agent.agentName');
-    this.setCompactCols('id', 'actionName');
     this.theme = Theme.dark;
   }
 
   ngOnInit(): void {
     this.pageManager!.withSortingSample(Action)
+      .withGridColumns('id', 'actionName', 'nextExecutionStartTime', 'actionState', 'actionScript.scriptName', 'agent.agentName')
+      .withCompactColumns('id', 'actionName')
       .withPageConfiguration(config => {
         config.queryMode = QueryMode.CRITERIA;
         config.itemsPerPage = 20;
@@ -84,12 +84,9 @@ export class PageActionComponent extends BasePageComponent<Action> implements On
       .withDefaultQuery(query => {
         query
           .withCondition(Condition.OR)
-          .addPredicate('agent.agentName', Operator.LIKE, '')
-          .and()
-          .addPredicate('actionScript.scriptName', Operator.LIKE, '')
-          .and()
-          .addPredicate('actionName', Operator.LIKE, '')
-          .and();
+          .addPredicate('agent.agentName', Operator.LIKE, '').and()
+          .addPredicate('actionScript.scriptName', Operator.LIKE, '').and()
+          .addPredicate('actionName', Operator.LIKE, '').and();
       })
       .withViewer(PageViewMode.EDITOR);
 
@@ -110,7 +107,7 @@ export class PageActionComponent extends BasePageComponent<Action> implements On
         config.pageTheme = this.theme;
         config.canCreate = false;
         config.canEdit = false;
-        config.canEdit = false;
+        config.canDelete = false;
         return config;
       })
       .withGridColumns('id', 'executionStartTime', 'executionEndTime', 'executionStatus')
