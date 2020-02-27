@@ -23,7 +23,7 @@
     "@ng-bootstrap/ng-bootstrap": "5.3.0",
     "@ngx-translate/core": "11.0.1",
     "@ngx-translate/http-loader": "4.0.0",
-    "angular-dynamic-page": "0.1.4",
+    "angular-dynamic-page": "0.1.5",
     "bootstrap": "4.4.1",
     "core-js": "3.5.0",
     "moment": "2.24.0",
